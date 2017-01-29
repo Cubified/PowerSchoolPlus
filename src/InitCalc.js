@@ -213,3 +213,5 @@ function InitCalc() {
         );
     }
 }
+
+module.exports = InitCalc;

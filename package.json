@@ -1,0 +1,28 @@
+{
+  "name": "powerschoolplus",
+  "version": "0.2.1",
+  "description": "A general enhancements suite for HCPS PowerSchool.",
+  "main": "app.js",
+  "scripts":{
+      "dev": "node_modules/.bin/browserify app.js -o app.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cubified/PowerSchoolPlus.git"
+  },
+  "keywords": [
+    "powerschool",
+    "hcps",
+    "grades",
+    "calculator"
+  ],
+  "author": "Cubified",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Cubified/PowerSchoolPlus/issues"
+  },
+  "homepage": "https://github.com/Cubified/PowerSchoolPlus#readme",
+  "devDependencies": {
+    "browserify": "^14.0.0"
+  }
+}

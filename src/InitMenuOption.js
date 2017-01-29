@@ -1,3 +1,5 @@
+var Dialogger = require('../Dialogger.js');
+
 function InitMenuOption() {
 	// This is put in a try/catch statement so that it will fail silently, as the sidebar option will throw an error when it attempts to attach itself to an element that does not exist
     try {
@@ -27,3 +29,5 @@ function InitMenuOption() {
 
     }
 }
+
+module.exports = InitMenuOption;

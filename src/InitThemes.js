@@ -87,8 +87,12 @@ function InitThemes() {
                 e.classList.add('blue');
                 e.style.border = '1px solid black';
             });
-            document.getElementById('changeTheme').value = 'blue';
-            document.getElementById('signin-custom-message').classList.add('blue');
+            if (location.href == 'https://sis.henrico.k12.va.us/public/home.html' || location.href == 'https://sis.henrico.k12.va.us/public/') {
+                document.getElementById('changeTheme').value = 'blue';
+                document.getElementById('signin-custom-message').classList.add('blue');
+            }
         }
     });
 }
+
+module.exports = InitThemes;

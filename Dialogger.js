@@ -1,3 +1,8 @@
+/*
+ * Dialogger v0.0.1
+ * Andrew Russell 2016
+ */
+
 var Dialogger = {
     elements: [],
     attach: function(q) {
@@ -52,3 +57,5 @@ var Dialogger = {
         });
     }
 };
+
+module.exports = Dialogger;

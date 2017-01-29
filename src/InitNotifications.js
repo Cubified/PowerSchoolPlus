@@ -7,3 +7,5 @@ function InitNotifications(){
         parentElem.innerHTML = 'You are using HCPS PowerSchool Plus v0.2.0<br>Click to see what\'s new';
     }
 }
+
+module.exports = InitNotifications;

@@ -23,3 +23,5 @@ function InitPreferredName() {
         });
     }
 }
+
+module.exports = InitPreferredName;
