@@ -111,3 +111,11 @@ td.yellow {
     left: 50%;
     transform: translateX(-50%);
 }
+.gradeUp{
+    background-color:#FFF !important;
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUA/wA0XsCoAAAAAXRSTlNMP4zV3QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=) !important;
+}
+.gradeDown{
+    background-color:#FFF !important;
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX/AAAZ4gk3AAAAAXRSTlNMP4zV3QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=) !important;
+}

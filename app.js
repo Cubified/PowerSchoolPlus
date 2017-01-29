@@ -8,7 +8,8 @@ var InitCalc = require('./src/InitCalc.js'),
 	InitPreferredName = require('./src/InitPreferredName.js'),
 	InitThemes = require('./src/InitThemes.js'),
 	InitNotifications = require('./src/InitNotifications.js'),
-	InitMenuOption = require('./src/InitMenuOption.js');
+	InitMenuOption = require('./src/InitMenuOption.js'),
+    InitGradeIndicator = require('./src/InitGradeIndicator.js');
 
 function PowerSchoolPlus(){
     this.init = ()=>{
@@ -18,6 +19,7 @@ function PowerSchoolPlus(){
         InitThemes();
         InitNotifications();
         InitMenuOption();
+        InitGradeIndicator();
     }
     return this;
 }
