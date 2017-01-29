@@ -14,7 +14,7 @@ HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 # Setup and Installation
 1. `Git clone "https://github.com/Cubified/PowerSchoolPlus"`
 2. `cd PowerSchoolPlus`
-3. `npm install && npm run dev`
+3. `npm install && npm run build`
 5. Navigate to [chrome://extensions](chrome://extensions)
 6. Tick the "Developer mode" box
 7. Press "Load unpacked extension..."

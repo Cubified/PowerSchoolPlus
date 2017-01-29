@@ -4,7 +4,7 @@
   "description": "A general enhancements suite for HCPS PowerSchool.",
   "main": "app.js",
   "scripts":{
-      "dev": "node_modules/.bin/browserify app.js -o app.bundle.js"
+      "build": "node_modules/.bin/browserify app.js -o app.bundle.js"
   },
   "repository": {
     "type": "git",
