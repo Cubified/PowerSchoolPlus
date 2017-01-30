@@ -7,7 +7,7 @@
     "content_scripts": [{
         "matches": ["https://sis.henrico.k12.va.us/*"],
         "css": ["src/css/waves.min.css","src/css/Dialogger.css","src/css/app.css"],
-        "js": ["app.bundle.js"]
+        "js": ["src/app.bundle.js"]
     }],
     "web_accessible_resources":[
         "src/html/note.html"

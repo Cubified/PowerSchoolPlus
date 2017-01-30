@@ -3,13 +3,13 @@
  * Andrew Russell 2017
  */
 
-var InitCalc = require('./src/InitCalc.js'),
-	InitWaves = require('./src/InitWaves.js'),
-	InitPreferredName = require('./src/InitPreferredName.js'),
-	InitThemes = require('./src/InitThemes.js'),
-	InitNotifications = require('./src/InitNotifications.js'),
-    InitMenuOption = require('./src/InitMenuOption.js'),
-    InitGradeIndicator = require('./src/InitGradeIndicator.js');
+var InitCalc = require('./InitCalc.js'),
+	InitWaves = require('./InitWaves.js'),
+	InitPreferredName = require('./InitPreferredName.js'),
+	InitThemes = require('./InitThemes.js'),
+	InitNotifications = require('./InitNotifications.js'),
+    InitMenuOption = require('./InitMenuOption.js'),
+    InitGradeIndicator = require('./InitGradeIndicator.js');
 
 function PowerSchoolPlus(){
     this.init = ()=>{

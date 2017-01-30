@@ -2,9 +2,9 @@
   "name": "powerschoolplus",
   "version": "0.2.1",
   "description": "A general enhancements suite for HCPS PowerSchool.",
-  "main": "app.js",
-  "scripts":{
-      "build": "node_modules/.bin/browserify app.js -o app.bundle.js"
+  "main": "src/app.js",
+  "scripts": {
+    "build": "node_modules/.bin/browserify src/app.js -o src/app.bundle.js"
   },
   "repository": {
     "type": "git",
