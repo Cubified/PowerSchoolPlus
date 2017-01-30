@@ -1,5 +1,14 @@
 var Dialogger = require('../Dialogger.js');
 
+var saveSettings = (json) => {
+    chrome.storage.sync.set({
+        'settings': json
+    });
+};
+var loadSettings = (callback) => {
+    chrome.storage.sync.get('settings', callback);
+};
+
 function InitMenuOption() {
 	// This is put in a try/catch statement so that it will fail silently, as the sidebar option will throw an error when it attempts to attach itself to an element that does not exist
     try {
@@ -9,11 +18,34 @@ function InitMenuOption() {
 			<h1>HCPS PowerSchool Plus v0.2.0</h1>
 			<br>
 			<a class='center-inline' href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/note.html">A note about grade calculation</a>
+            <br><br>
+            <label for="toggle-gradecalc">Enable grade calculator: </label><input type='checkbox' checked id="toggle-gradecalc"><br>
+            <label for="toggle-buttonripples">Enable button ripples: </label><input type='checkbox' checked id="toggle-buttonripples"><br>
+            <label for="toggle-preferredname">Enable preferred name: </label><input type='checkbox' checked id="toggle-preferredname"><br>
+            <label for="toggle-themes">Enable themes: </label><input type='checkbox' checked id="toggle-themes"><br>
+            <label for="toggle-notifications">Enable login screen notifications: </label><input type='checkbox' checked id="toggle-notifications"><br>
+            <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator">
+            <br><br>(Changes with come into effect when this dialog is closed)
 		`;
         document.body.appendChild(dialog);
 
+        loadSettings((data)=>{
+            if(data.settings !== undefined){
+                for(var key in data.settings){
+                    document.getElementById('toggle-'+key).checked = data.settings[key];
+                }
+            }
+        });
+
         Dialogger.attach('#dialog-psp');
-        Dialogger.init();
+        Dialogger.init({onClose:()=>{
+            var json = {};
+            [].forEach.call(document.getElementById('dialog-psp').querySelectorAll('input'),(e)=>{
+                json[e.id.split('toggle-')[1]] = e.checked;
+            });
+            saveSettings(json);
+            location.reload();
+        }});
 
         var createdElement = document.createElement('li');
         var createdLink = document.createElement('a');

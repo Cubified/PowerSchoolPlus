@@ -11,7 +11,7 @@ var Dialogger = {
             self.elements.push(e);
         });
     },
-    init: function() {
+    init: function(opts) {
         [].forEach.call(this.elements, (e, i, a) => {
             var Coverup = document.createElement('div');
             Coverup.classList.add('Dialogger-Coverup');
@@ -50,8 +50,14 @@ var Dialogger = {
             e.toggleState = function() {
                 if (this.isOpen) {
                     this.close();
+                    if(opts !== undefined && opts.onClose !== undefined){
+                        opts.onClose();
+                    }
                 } else {
                     this.open();
+                    if(opts !== undefined && opts.onOpen !== undefined){
+                        opts.onOpen();
+                    }
                 }
             };
         });

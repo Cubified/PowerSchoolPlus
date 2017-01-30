@@ -13,7 +13,7 @@ input {
     cursor: pointer;
 }
 button.blue,
-#signin-custom-message.blue {
+#signin-custom-message.enabled.blue {
     background: #3F51B5 !important;
     color: white !important;
 }
@@ -23,7 +23,7 @@ td.blue {
     color: black !important;
 }
 button.red,
-#signin-custom-message.red {
+#signin-custom-message.enabled.red {
     background: #F44336 !important;
     color: white !important;
 }
@@ -33,7 +33,7 @@ td.red {
     color: black !important;
 }
 button.pink,
-#signin-custom-message.pink {
+#signin-custom-message.enabled.pink {
     background: #E91E63 !important;
     color: white !important;
 }
@@ -43,7 +43,7 @@ td.pink {
     color: black !important;
 }
 button.cyan,
-#signin-custom-message.cyan {
+#signin-custom-message.enabled.cyan {
     background: #00BCD4 !important;
     color: white !important;
 }
@@ -53,7 +53,7 @@ td.cyan {
     color: black !important;
 }
 button.green,
-#signin-custom-message.green {
+#signin-custom-message.enabled.green {
     background: #4CAF50 !important;
     color: white !important;
 }
@@ -63,7 +63,7 @@ td.green {
     color: black !important;
 }
 button.orange,
-#signin-custom-message.orange {
+#signin-custom-message.enabled.orange {
     background: #FF5722 !important;
     color: white !important;
 }
@@ -73,7 +73,7 @@ td.orange {
     color: black !important;
 }
 button.yellow,
-#signin-custom-message.yellow {
+#signin-custom-message.enabled.yellow {
     background: #FFC107 !important;
     color: black !important;
 }
@@ -88,7 +88,7 @@ td.yellow {
 .clickable {
     cursor: pointer;
 }
-#signin-custom-message {
+#signin-custom-message.enabled {
     padding: 15px !important;
     border: none !important;
     box-shadow: none !important;
