@@ -2,15 +2,15 @@
     "manifest_version": 2,
     "name": "HCPS PowerSchool Plus",
     "short_name": "PowerSchool Plus",
-    "version": "0.2.0",
+    "version": "0.2.5",
     "description": "A general enhancements suite for HCPS PowerSchool.",
     "content_scripts": [{
         "matches": ["https://sis.henrico.k12.va.us/*"],
-        "css": ["waves.min.css","Dialogger.css","app.css"],
+        "css": ["src/css/waves.min.css","src/css/Dialogger.css","src/css/app.css"],
         "js": ["app.bundle.js"]
     }],
     "web_accessible_resources":[
-        "note.html"
+        "src/html/note.html"
     ],
     "icons":{
         "512":"icons/512x512.png",

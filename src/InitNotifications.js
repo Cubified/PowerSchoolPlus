@@ -5,7 +5,7 @@ function InitNotifications(){
         parentElem.addEventListener('click',()=>{
         	window.open('https://chrome.google.com/webstore/detail/hcps-powerschool-plus/dibndjeeemhjkcieffbjkjdgleplkhkl','_self');
         });
-        parentElem.innerHTML = 'You are using HCPS PowerSchool Plus v0.2.0<br>Click to see what\'s new';
+        parentElem.innerHTML = 'You are using HCPS PowerSchool Plus v0.2.5<br>Click to see what\'s new';
     }
 }
 

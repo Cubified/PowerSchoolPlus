@@ -1,4 +1,4 @@
-var Dialogger = require('../Dialogger.js');
+var Dialogger = require('./lib/Dialogger.js');
 
 var saveSettings = (json) => {
     chrome.storage.sync.set({
@@ -17,7 +17,7 @@ function InitMenuOption() {
         dialog.innerHTML = `
 			<h1>HCPS PowerSchool Plus v0.2.0</h1>
 			<br>
-			<a class='center-inline' href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/note.html">A note about grade calculation</a>
+			<a class='center-inline' href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/note.html">A note about grade calculation</a>
             <br><br>
             <label for="toggle-gradecalc">Enable grade calculator: </label><input type='checkbox' checked id="toggle-gradecalc"><br>
             <label for="toggle-buttonripples">Enable button ripples: </label><input type='checkbox' checked id="toggle-buttonripples"><br>
