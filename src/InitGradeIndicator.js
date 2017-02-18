@@ -52,11 +52,11 @@ function InitGradeIndicator() {
                     grades.forEach((el) => {
                         if (e.quarter == el.quarter && e.id == el.id) {
                             if (e.grade > el.grade) {
-                            	console.log('Grade went from ' + e.grade + ' to ' + el.grade);
                                 el.element.parentNode.classList.add('gradeDown');
+                                el.element.parentNode.title = 'Grade decreased from ' + e.grade + '% to ' + el.grade + '%';
                             } else if (e.grade < el.grade) {
-                            	console.log('Grade went from ' + e.grade + ' to ' + el.grade);
                                 el.element.parentNode.classList.add('gradeUp');
+                                el.element.parentNode.title = 'Grade increased from ' + e.grade + '% to ' + el.grade + '%';
                             }
                         }
                     });

@@ -15,7 +15,7 @@ function InitMenuOption() {
         var dialog = document.createElement('div');
         dialog.id = 'dialog-psp';
         dialog.innerHTML = `
-			<h1>HCPS PowerSchool Plus v0.2.0</h1>
+			<h1>HCPS PowerSchool Plus v0.2.5</h1>
 			<br>
 			<a class='center-inline' href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/note.html">A note about grade calculation</a>
             <br><br>
