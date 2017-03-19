@@ -1,4 +1,4 @@
-# PowerSchoolPlus v0.2.6
+# PowerSchoolPlus v0.2.7
 HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 
 # Features
@@ -6,6 +6,7 @@ HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 * Ability to set preferred name
 * Theming
 * Grade change indicator
+* Grade history viewer
 * Button ripples
 * Ability to enable/disable features
 

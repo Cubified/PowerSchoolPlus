@@ -1,5 +1,5 @@
 /*
- * HCPS PowerSchool Plus v0.2.5
+ * HCPS PowerSchool Plus v0.2.7
  * Andrew Russell 2017
  */
 
@@ -9,7 +9,8 @@ var InitCalc = require('./InitCalc.js'),
 	InitThemes = require('./InitThemes.js'),
 	InitNotifications = require('./InitNotifications.js'),
     InitMenuOption = require('./InitMenuOption.js'),
-    InitGradeIndicator = require('./InitGradeIndicator.js');
+    InitGradeIndicator = require('./InitGradeIndicator.js'),
+    InitGradeHistory = require('./InitGradeHistory.js');
 
 function PowerSchoolPlus(){
     this.init = ()=>{
@@ -21,6 +22,7 @@ function PowerSchoolPlus(){
                 if(data.settings.themes){InitThemes();}
                 if(data.settings.notifications){InitNotifications();}
                 if(data.settings.indicator){InitGradeIndicator();}
+                if(data.settings.history){InitGradeHistory();}
                 InitMenuOption();
             }
             else{
@@ -31,6 +33,7 @@ function PowerSchoolPlus(){
                 InitNotifications();
                 InitGradeIndicator();
                 InitMenuOption();
+                InitGradeHistory();
             }
         });
     }

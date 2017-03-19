@@ -1,4 +1,4 @@
-var Dialogger = require('./lib/Dialogger.js');
+var Dialogger = require('./lib/Dialogger.v2.js');
 
 var saveSettings = (json) => {
     chrome.storage.sync.set({
@@ -10,14 +10,16 @@ var loadSettings = (callback) => {
 };
 
 function InitMenuOption() {
-	// This is put in a try/catch statement so that it will fail silently, as the sidebar option will throw an error when it attempts to attach itself to an element that does not exist
     try {
         var dialog = document.createElement('div');
         dialog.id = 'dialog-psp';
-        dialog.innerHTML = `
-			<h1>HCPS PowerSchool Plus v0.2.5</h1>
+        dialog.classList.add('Dialogger');
+        dialog.innerHTML = `<div><div>
+			<h1>HCPS PowerSchool Plus v0.2.7</h1>
 			<br>
-			<a class='center-inline' href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/note.html">A note about grade calculation</a>
+			<a href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/note.html">A note about grade calculation</a>
+            <br>
+            <a href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/history.html">View your grade history for this quarter</a>
             <br><br>
             <label for="toggle-gradecalc">Enable grade calculator: </label><input type='checkbox' checked id="toggle-gradecalc"><br>
             <label for="toggle-buttonripples">Enable button ripples: </label><input type='checkbox' checked id="toggle-buttonripples"><br>
@@ -25,7 +27,7 @@ function InitMenuOption() {
             <label for="toggle-themes">Enable themes: </label><input type='checkbox' checked id="toggle-themes"><br>
             <label for="toggle-notifications">Enable login screen notifications: </label><input type='checkbox' checked id="toggle-notifications"><br>
             <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator">
-            <br><br>(Changes with come into effect when this dialog is closed)
+            <br><br>(Changes with come into effect when this dialog is closed)</div></div>
 		`;
         document.body.appendChild(dialog);
 
@@ -37,8 +39,7 @@ function InitMenuOption() {
             }
         });
 
-        Dialogger.attach('#dialog-psp');
-        Dialogger.init({onClose:()=>{
+        Dialogger({onClose:function(){
             var json = {};
             [].forEach.call(document.getElementById('dialog-psp').querySelectorAll('input'),(e)=>{
                 json[e.id.split('toggle-')[1]] = e.checked;
@@ -58,7 +59,6 @@ function InitMenuOption() {
         document.getElementById('btn-transportation').parentNode.appendChild(createdElement);
     }
     catch (e) {
-
     }
 }
 

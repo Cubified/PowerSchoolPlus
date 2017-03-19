@@ -105,12 +105,6 @@ td.yellow {
 #btn-print-transcript > a {
     background-position: 0 4px !important;
 }
-.center-inline {
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
 .gradeUp{
     background-color:#FFF !important;
     background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUA/wA0XsCoAAAAAXRSTlNMP4zV3QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=) !important;
@@ -118,4 +112,16 @@ td.yellow {
 .gradeDown{
     background-color:#FFF !important;
     background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX/AAAZ4gk3AAAAAXRSTlNMP4zV3QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=) !important;
+}
+.full-width{
+    width:100%;
+}
+#btnNoNav,#btnContMax{
+    z-index:0 !important;
+}
+.ui-draggable,.ui-draggable > *{
+    transition:none !important;
+}
+.ui-draggable{
+    box-shadow:rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
