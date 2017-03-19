@@ -17,9 +17,9 @@ function InitMenuOption() {
         dialog.innerHTML = `<div><div>
 			<h1>HCPS PowerSchool Plus v0.2.7</h1>
 			<br>
-			<a href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/note.html">A note about grade calculation</a>
+			<a href="chrome-extension://${chrome.runtime.id}/src/html/note.html">A note about grade calculation</a>
             <br>
-            <a href="chrome-extension://dibndjeeemhjkcieffbjkjdgleplkhkl/src/html/history.html">View your grade history for this quarter</a>
+            <a href="chrome-extension://${chrome.runtime.id}/src/html/history.html">View your grade history for this quarter</a>
             <br><br>
             <label for="toggle-gradecalc">Enable grade calculator: </label><input type='checkbox' checked id="toggle-gradecalc"><br>
             <label for="toggle-buttonripples">Enable button ripples: </label><input type='checkbox' checked id="toggle-buttonripples"><br>

@@ -74,4 +74,4 @@ function InitGradeHistory(){
     }
 }
 
-module.exports = InitGradeHistory();
+module.exports = InitGradeHistory;
