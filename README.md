@@ -23,3 +23,8 @@ HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 7. Press "Load unpacked extension..."
 8. Select the folder containing PowerSchool Plus
 9. Success!
+
+# Libraries Used
+- [Chart.js](http://www.chartjs.org/)
+- [Please.js](http://checkman.io/please/)
+- [Waves](http://fian.my.id/Waves/)

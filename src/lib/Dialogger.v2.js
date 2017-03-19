@@ -1,6 +1,6 @@
 /*
  * Dialogger v2.0.0
- * Andrew Russell 2017
+ * CubeDoodl 2017
  */
 
 function DialoggerV2(options) {

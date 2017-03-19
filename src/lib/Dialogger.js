@@ -2,7 +2,7 @@
 
 /*
  * Dialogger v0.0.1
- * Andrew Russell 2016
+ * CubeDoodl 2016
  */
 
 var Dialogger = {
