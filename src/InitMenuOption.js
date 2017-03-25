@@ -26,8 +26,7 @@ function InitMenuOption() {
             <label for="toggle-preferredname">Enable preferred name: </label><input type='checkbox' checked id="toggle-preferredname"><br>
             <label for="toggle-themes">Enable themes: </label><input type='checkbox' checked id="toggle-themes"><br>
             <label for="toggle-notifications">Enable login screen notifications: </label><input type='checkbox' checked id="toggle-notifications"><br>
-            <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator"><br>
-            <label for="toggle-beta">Opt-in to experimental features (not recommended): </label><input type='checkbox' id="toggle-beta">
+            <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator">
             <br><br>(Changes with come into effect when this dialog is closed)</div></div>
 		`;
         document.body.appendChild(dialog);

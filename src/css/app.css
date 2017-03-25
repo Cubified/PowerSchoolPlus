@@ -154,3 +154,7 @@ td.yellow {
 .ui-draggable {
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
+
+#login-help > a{
+    line-height:3;
+}
