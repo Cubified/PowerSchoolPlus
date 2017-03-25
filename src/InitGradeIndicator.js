@@ -1,5 +1,5 @@
-var getNumbersInString = (str) => {
-    var out = '';
+const getNumbersInString = (str) => {
+    let out = '';
     str.split('').forEach((e) => {
         if ('0123456789.'.indexOf(e) > -1) {
             out += e;
@@ -7,8 +7,8 @@ var getNumbersInString = (str) => {
     });
     return out;
 };
-var getGrades = () => {
-    var out = [];
+const getGrades = () => {
+    const out = [];
     [].forEach.call(document.querySelectorAll('tr > td > a'), (e) => {
         if (e.href.indexOf('scores.html') > -1) {
             out.push(e);
@@ -16,12 +16,12 @@ var getGrades = () => {
     });
     return out;
 };
-var convertGradesToJSON = (grades) => {
-    var quarters = document.querySelectorAll('tr.center.th2')[0].children,
+const convertGradesToJSON = (grades) => {
+    const quarters = document.querySelectorAll('tr.center.th2')[0].children,
         out = [];
     grades.forEach((e) => {
         [].forEach.call(quarters, (el) => {
-            if (e.parentNode.offsetLeft == el.offsetLeft) {
+            if (e.parentNode.offsetLeft === el.offsetLeft) {
                 out.push({
                     grade: parseFloat(getNumbersInString(e.innerText)),
                     quarter: el.innerText,
@@ -34,23 +34,23 @@ var convertGradesToJSON = (grades) => {
     return out;
 };
 
-var saveGrades = (json) => {
+const saveGrades = (json) => {
     chrome.storage.sync.set({
         'grades': json
     });
 };
-var loadGrades = (callback) => {
+const loadGrades = (callback) => {
     chrome.storage.sync.get('grades', callback);
 };
 
 function InitGradeIndicator() {
-    if (location.href == "https://sis.henrico.k12.va.us/guardian/home.html") {
+    if (location.href === "https://sis.henrico.k12.va.us/guardian/home.html") {
         loadGrades((data) => {
             if (data.grades !== undefined && data.grades !== null) {
                 data.grades.forEach((e) => {
-                    var grades = convertGradesToJSON(getGrades());
+                    const grades = convertGradesToJSON(getGrades());
                     grades.forEach((el) => {
-                        if (e.quarter == el.quarter && e.id == el.id) {
+                        if (e.quarter === el.quarter && e.id === el.id) {
                             if (e.grade > el.grade) {
                                 el.element.parentNode.classList.add('gradeDown');
                                 el.element.parentNode.title = 'Grade decreased from ' + e.grade + '% to ' + el.grade + '%';

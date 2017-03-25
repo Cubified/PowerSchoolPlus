@@ -1,24 +1,24 @@
 // Various useful functions, should be relatively self explanatory
-var sumAllInArray = (v) => {
-    var tmp = 0;
+const sumAllInArray = (v) => {
+    let tmp = 0;
     v.forEach((e) => {
         tmp += e
     });
     return tmp;
 };
-var calcWeightedMean = (arr) => {
-    var t = [],
+const calcWeightedMean = (arr) => {
+    const t = [],
         w = [];
     arr.forEach((e, i, a) => {
         t.push(e.grade * e.weight);
         w.push(e.weight);
     });
-    var n = sumAllInArray(t);
+    const n = sumAllInArray(t);
     return (n / sumAllInArray(w));
 };
 
-var getNumbersInString = (str) => {
-    var out = '';
+const getNumbersInString = (str) => {
+    let out = '';
     str.split('').forEach((e) => {
         if ('0123456789.'.split('').indexOf(e) > -1) {
             out += e
@@ -27,10 +27,10 @@ var getNumbersInString = (str) => {
     return out;
 };
 
-var calculateLetterGrade = (grade) => {
-    var grades = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
-    var floors = [97, 93, 90, 87, 83, 80, 77, 73, 70, 68, 66, 60, 0];
-    var temp = '',
+const calculateLetterGrade = (grade) => {
+    const grades = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
+    const floors = [97, 93, 90, 87, 83, 80, 77, 73, 70, 68, 66, 60, 0];
+    let temp = '',
         hit = false;
     grades.forEach((e, i) => {
         if (grade >= floors[i] && !hit) {
@@ -58,18 +58,19 @@ class Calculator {
     }
 
     idIsUsed(id) {
-        var hit = false;
+        let hit = false;
         this.activeGrades.forEach((e) => {
-            if (e.id == id) {
+            if (e.id === id) {
                 hit = true;
             }
         });
         return hit;
     }
+
     generateId(l) {
-        var a = 'abcdefghijklmnopqrstuvwxyz0123456789'.split(''),
-            t = '';
-        for (var b = 0; b < l; b++) {
+        const a = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('');
+        let t = '';
+        for (let b = 0; b < l; b++) {
             t += a[Math.floor(Math.random() * a.length)];
         }
         if (this.idIsUsed(t)) {
@@ -84,14 +85,15 @@ class Calculator {
 
     disableGrade(id) {
         this.activeGrades.forEach((e, i) => {
-            if (e.id == id) {
+            if (e.id === id) {
                 this.activeGrades.splice(i, 1);
             }
         });
     }
+
     enableGrade(id) {
         this.allGrades.forEach((e) => {
-            if (e.id == id) {
+            if (e.id === id) {
                 this.activeGrades.push(e);
             }
         });
@@ -103,10 +105,10 @@ class Calculator {
     }
 
     showAddedGrade(weight, grade, id) {
-        var date = new Date();
-        var createdTr = document.createElement('tr');
+        const date = new Date();
+        const createdTr = document.createElement('tr');
         createdTr.innerHTML = `
-    		<td>${((date.getMonth()<9?'0':'')+(date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
+    		<td>${((date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
     		<td>${weight + '%'}</td>
     		<td>New Grade (Click to Disable)</td>
     		<td></td>
@@ -125,18 +127,18 @@ class Calculator {
 
         createdTr.classList.add('clickable');
 
-        if(this.addedGradesContainer.children.length % 2 == 1){
-        	createdTr.classList.add('oddRow')
+        if (this.addedGradesContainer.children.length % 2 === 1) {
+            createdTr.classList.add('oddRow')
         }
 
         createdTr.dataset.active = 'true';
         createdTr.addEventListener('click', () => {
-            if (createdTr.dataset.active == 'true') {
-            	createdTr.classList.add('faded');
+            if (createdTr.dataset.active === 'true') {
+                createdTr.classList.add('faded');
                 createdTr.dataset.active = 'false';
                 this.disableGrade(createdTr.dataset.id);
             } else {
-            	createdTr.classList.remove('faded');
+                createdTr.classList.remove('faded');
                 createdTr.dataset.active = 'true';
                 this.enableGrade(createdTr.dataset.id);
             }
@@ -145,10 +147,10 @@ class Calculator {
     }
 
     addNewGrade(weight, grade) {
-        var newGrade = {
+        const newGrade = {
             weight: weight,
             grade: grade,
-            id:this.generateId(8)
+            id: this.generateId(8)
         };
         this.allGrades.push(newGrade);
         this.activeGrades.push(newGrade);
@@ -158,10 +160,10 @@ class Calculator {
 
     attach(elem, weight, grade, calc) {
         elem.addEventListener('click', () => {
-            if(weight.value !== '' && grade.value !== ''){
+            if (weight.value !== '' && grade.value !== '') {
                 calc.addNewGrade(parseInt(weight.value), parseInt(grade.value));
             }
-            else{
+            else {
                 alert('Please correct your inputs');
             }
         });
@@ -171,22 +173,22 @@ class Calculator {
 function InitCalc() {
     if (location.href.indexOf('https://sis.henrico.k12.va.us/guardian/scores.html') > -1) {
         // Parent element to which new grades are added
-        var parent = document.querySelectorAll('tbody')[1];
+        const parent = document.querySelectorAll('tbody')[1];
 
         // Create buttons/input fields of calculator
-        var addGradeButton = document.createElement('button');
+        const addGradeButton = document.createElement('button');
         addGradeButton.innerHTML = 'Add Grade';
         addGradeButton.id = 'addGradeButton';
-        var newWeightInput = document.createElement('input');
+        const newWeightInput = document.createElement('input');
         newWeightInput.placeholder = 'Weight';
         newWeightInput.id = 'newWeightInput';
-        var newGradeInput = document.createElement('input');
+        const newGradeInput = document.createElement('input');
         newGradeInput.placeholder = 'Grade';
         newGradeInput.id = 'newGradeInput';
         newWeightInput.type = newGradeInput.type = 'number';
 
         // Parent element for calculator
-        var parentTr = document.createElement('tr');
+        const parentTr = document.createElement('tr');
         parentTr.innerHTML = `
     		<td>${addGradeButton.outerHTML}</td>
     		<td>${newWeightInput.outerHTML}</td>
@@ -200,7 +202,7 @@ function InitCalc() {
         document.querySelectorAll('tr.center > td')[3].innerHTML += `<br><div id='recalculatedGrade'></div>`;
 
         // Initialize the calculator
-        var calc = new Calculator(
+        const calc = new Calculator(
             parseFloat(getNumbersInString(document.querySelectorAll('tbody')[0].children[1].children[3].innerText)).toFixed(1),
             document.getElementById('recalculatedGrade'),
             document.querySelectorAll('tbody')[1]

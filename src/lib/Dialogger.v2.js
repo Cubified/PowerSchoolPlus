@@ -4,20 +4,23 @@
  */
 
 function DialoggerV2(options) {
-    var opts = options || {onClose:function(){}};
+    const opts = options || {
+            onClose: function () {
+            }
+        };
 
     [].forEach.call(document.querySelectorAll('.Dialogger'), (e) => {
-        var coverup = document.createElement('div');
+        const coverup = document.createElement('div');
         coverup.classList.add('Dialogger-coverup');
         e.innerHTML = coverup.outerHTML + e.innerHTML;
         e.addEventListener('click', (event) => {
-            if (event.target.classList == 'Dialogger-coverup') {
+            if (event.target.classList === 'Dialogger-coverup') {
                 e.hide();
             }
         });
         e.children[1].id = 'fullWidthParent';
-        e.children[1].addEventListener('click',(event)=>{
-            if(event.target.id=='fullWidthParent'){
+        e.children[1].addEventListener('click', (event) => {
+            if (event.target.id === 'fullWidthParent') {
                 e.hide();
             }
         });
@@ -40,15 +43,15 @@ function DialoggerV2(options) {
             opts.onClose();
         };
         e.toggleState = () => {
-            if (e.dataset.visible == 'true') {
+            if (e.dataset.visible === 'true') {
                 e.hide();
             } else {
                 e.show();
             }
         };
-        if (e.dataset.visible == 'true') {
+        if (e.dataset.visible === 'true') {
             e.show();
-        } else if (e.dataset.visible == 'false') {
+        } else if (e.dataset.visible === 'false') {
             e.hide();
         } else {
             e.dataset.visible = 'false';

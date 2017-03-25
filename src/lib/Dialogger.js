@@ -5,24 +5,24 @@
  * CubeDoodl 2016
  */
 
-var Dialogger = {
+const Dialogger = {
     elements: [],
     attach: function attach(q) {
-        var self = this;
+        const self = this;
         [].forEach.call(document.querySelectorAll(q), function (e, i, a) {
             self.elements.push(e);
         });
     },
     init: function init(opts) {
         [].forEach.call(this.elements, function (e, i, a) {
-            var Coverup = document.createElement('div');
+            const Coverup = document.createElement('div');
             Coverup.classList.add('Dialogger-Coverup');
             Coverup.addEventListener('click', function () {
                 e.toggleState();
             });
-            var Background = document.createElement('div');
+            const Background = document.createElement('div');
             Background.classList.add('Dialogger-Background');
-            var Content = document.createElement('div');
+            const Content = document.createElement('div');
             Content.classList.add('Dialogger-Content');
             Content.innerHTML = e.innerHTML;
             e.innerHTML = '';
@@ -44,7 +44,7 @@ var Dialogger = {
             e.close = function () {
                 this.isOpen = false;
                 this.style.opacity = 0;
-                var s = this;
+                const s = this;
                 setTimeout(function () {
                     s.style.visibility = 'hidden';
                 }, 220);

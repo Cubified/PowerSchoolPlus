@@ -1,17 +1,17 @@
-var Dialogger = require('./lib/Dialogger.v2.js');
+const Dialogger = require('./lib/Dialogger.v2.js');
 
-var saveSettings = (json) => {
+const saveSettings = (json) => {
     chrome.storage.sync.set({
         'settings': json
     });
 };
-var loadSettings = (callback) => {
+const loadSettings = (callback) => {
     chrome.storage.sync.get('settings', callback);
 };
 
 function InitMenuOption() {
     try {
-        var dialog = document.createElement('div');
+        const dialog = document.createElement('div');
         dialog.id = 'dialog-psp';
         dialog.classList.add('Dialogger');
         dialog.innerHTML = `<div><div>
@@ -31,25 +31,27 @@ function InitMenuOption() {
 		`;
         document.body.appendChild(dialog);
 
-        loadSettings((data)=>{
-            if(data.settings !== undefined){
-                for(var key in data.settings){
-                    document.getElementById('toggle-'+key).checked = data.settings[key];
+        loadSettings((data) => {
+            if (data.settings !== undefined) {
+                for (let key in data.settings) {
+                    document.getElementById('toggle-' + key).checked = data.settings[key];
                 }
             }
         });
 
-        Dialogger({onClose:function(){
-            var json = {};
-            [].forEach.call(document.getElementById('dialog-psp').querySelectorAll('input'),(e)=>{
-                json[e.id.split('toggle-')[1]] = e.checked;
-            });
-            saveSettings(json);
-            location.reload();
-        }});
+        Dialogger({
+            onClose: function () {
+                const json = {};
+                [].forEach.call(document.getElementById('dialog-psp').querySelectorAll('input'), (e) => {
+                    json[e.id.split('toggle-')[1]] = e.checked;
+                });
+                saveSettings(json);
+                location.reload();
+            }
+        });
 
-        var createdElement = document.createElement('li');
-        var createdLink = document.createElement('a');
+        const createdElement = document.createElement('li');
+        const createdLink = document.createElement('a');
         createdLink.classList.add('button-options');
         createdLink.innerHTML = 'PowerSchool Plus';
         createdLink.addEventListener('click', () => {

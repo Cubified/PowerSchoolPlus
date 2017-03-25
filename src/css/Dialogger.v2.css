@@ -3,42 +3,45 @@
  * CubeDoodl 2017
  */
 
-.Dialogger{
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
-  height:100vh;
-  width:100vw;
-  text-align:center;
-  position:fixed;
-  transition:opacity 0.3s;
-  opacity:0;
-  visibility:hidden;
-  display:none;
-  top:0;
+.Dialogger {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    position: fixed;
+    transition: opacity 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    top: 0;
 }
-.Dialogger > div{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+.Dialogger > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.Dialogger > div > div{
-  padding-left:50px;
-  padding-right:50px;
-  padding-top:25px;
-  padding-bottom:25px;
-  background:#f3f3f3;
-  z-index:999;
-  box-shadow:0 2px 5px rgba(0,0,0,0.3);
+
+.Dialogger > div > div {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: #f3f3f3;
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-.Dialogger-coverup{
-  position:relative;
-  top:0;
-  width:100vw;
-  height:100vh;
-  display:block;
-  position:fixed;
-  opacity:0.6;
-  background:#333;
-  z-index:-1;
+
+.Dialogger-coverup {
+    position: relative;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    opacity: 0.6;
+    background: #333;
+    z-index: -1;
 }

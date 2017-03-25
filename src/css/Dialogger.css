@@ -1,41 +1,44 @@
-.Dialogger-Coverup{
-  width:100vw;
-  height:100vh;
-  background:#333;
-  content:'';
-  opacity:0.3;
-  display:block;
-  position:fixed;
-  top:-50%;
-  left:-50%;
-  z-index:-1;
+.Dialogger-Coverup {
+    width: 100vw;
+    height: 100vh;
+    background: #333;
+    content: '';
+    opacity: 0.3;
+    display: block;
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
 }
-.Dialogger-Background{
-  z-index:1;
-  width:100%;
-  height:100%;
-  display:block;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#EEE;
+
+.Dialogger-Background {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #EEE;
 }
-.Dialogger-Content{
-  z-index:999;
+
+.Dialogger-Content {
+    z-index: 999;
 }
-.Dialogger{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:fixed;
-  top:50%;
-  left:50%;
-  opacity:1;
-  transform:translate(-50%,-50%);
-  width:50vw;
-  height:50vh;
-  box-shadow:0 5px 10px rgba(0,0,0,0.3);
-  z-index:255;
-  transition:opacity 0.22s;
+
+.Dialogger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 255;
+    transition: opacity 0.22s;
 }

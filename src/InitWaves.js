@@ -1,6 +1,6 @@
-var Waves = require('./lib/waves.min.js');
+const Waves = require('./lib/waves.min.js');
 
-function InitWaves(){
+function InitWaves() {
     Waves.attach('button', ['waves-button', 'waves-light', 'waves-float']);
     Waves.init();
 }

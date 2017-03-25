@@ -1,7 +1,7 @@
 // This needs some work
 
-var getNumbersInString = (str) => {
-    var out = '';
+const getNumbersInString = (str) => {
+    let out = '';
     str.split('').forEach((e) => {
         if ('0123456789.'.indexOf(e) > -1) {
             out += e;
@@ -10,24 +10,24 @@ var getNumbersInString = (str) => {
     return out;
 };
 
-var loadGrades = (callback) => {
+const loadGrades = (callback) => {
     chrome.storage.sync.get('gradehistory', callback);
 };
 
-var gradeDates = (grades) => {
-    var out = [];
+const gradeDates = (grades) => {
+    const out = [];
     grades.forEach((e) => {
-        var date = new Date(e.date);
+        const date = new Date(e.date);
         out.push(date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear());
     });
     return out;
 };
 
-var getGradesFromClass = (grades, c, quarter) => {
-    var out = [];
+const getGradesFromClass = (grades, c, quarter) => {
+    const out = [];
     grades.forEach((e) => {
         e.grades.forEach((el) => {
-            if (el.class.replace(/^\s+|\s+$/g, '') == c && el.quarter == quarter && el.grade !== 0) {
+            if (el.class.replace(/^\s+|\s+$/g, '') === c && el.quarter === quarter && el.grade !== 0) {
                 out.push(el.grade);
             }
         });
@@ -35,8 +35,8 @@ var getGradesFromClass = (grades, c, quarter) => {
     return out;
 };
 
-var findNewestQuarter = (grades) => {
-    var out = 'Q1';
+const findNewestQuarter = (grades) => {
+    let out = 'Q1';
     grades.forEach((e) => {
         e.grades.forEach((el) => {
             if (el.quarter.indexOf('Q') > -1) {
@@ -49,21 +49,21 @@ var findNewestQuarter = (grades) => {
     return out;
 };
 
-var ctx = document.querySelector('canvas');
+const ctx = document.querySelector('canvas');
 
 loadGrades((data) => {
-    if (data.gradehistory.length > 1) {
-        var classes = [],
+    if (data.gradehistory !== undefined && data.gradehistory.length > 1) {
+        const classes = [],
             quarter = findNewestQuarter(data.gradehistory);
         data.gradehistory[0].grades.forEach((e) => {
-            if (classes.indexOf(e.class) == -1) {
+            if (classes.indexOf(e.class) === -1) {
                 classes.push(e.class);
             }
         });
 
-        var datasets = [];
+        const datasets = [];
         classes.forEach((e) => {
-            var col = Please.make_color({
+            const col = Please.make_color({
                 format: 'rgb'
             });
 
@@ -77,7 +77,7 @@ loadGrades((data) => {
             });
         });
 
-        var chart = new Chart(ctx, {
+        let chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: gradeDates(data.gradehistory),
