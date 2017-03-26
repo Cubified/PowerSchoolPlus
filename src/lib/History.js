@@ -11,7 +11,7 @@ const getNumbersInString = (str) => {
 };
 
 const loadGrades = (callback) => {
-    chrome.storage.sync.get('gradehistory', callback);
+    chrome.storage.local.get('gradehistory', callback);
 };
 
 const gradeDates = (grades) => {
@@ -68,7 +68,7 @@ loadGrades((data) => {
             });
 
             datasets.push({
-                label: e + '- ' + quarter,
+                label: e + ' - ' + quarter,
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: `rgba(${col.r},${col.g},${col.b},0.4)`,

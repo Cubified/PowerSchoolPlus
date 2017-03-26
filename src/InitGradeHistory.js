@@ -46,7 +46,7 @@ const saveGrades = (json) => {
             data.gradehistory.forEach((e) => {
                 e.grades.forEach((el) => {
                     json.grades.forEach((ele) => {
-                        if (el.class == ele.class && el.quarter == ele.quarter) {
+                        if (el.class === ele.class && el.quarter === ele.quarter) {
                             if (el.grade !== ele.grade) {
                                 difference = true;
                             }
@@ -58,7 +58,7 @@ const saveGrades = (json) => {
         else {
             difference = true;
         }
-        const temp = (data.gradehistory == undefined ? [] : data.gradehistory);
+        const temp = (data.gradehistory === undefined ? [] : data.gradehistory);
         temp.push(json);
         if (difference) {
             chrome.storage.local.set({

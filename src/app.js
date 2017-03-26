@@ -34,10 +34,8 @@ function PowerSchoolPlus() {
                 if (data.settings.indicator) {
                     InitGradeIndicator();
                 }
-                if (data.settings.history) {
-                    InitGradeHistory();
-                }
                 InitMenuOption();
+                InitGradeHistory();
             }
             else {
                 InitCalc();
