@@ -14,7 +14,7 @@ function DialoggerV2(options) {
         coverup.classList.add('Dialogger-coverup');
         e.innerHTML = coverup.outerHTML + e.innerHTML;
         e.addEventListener('click', (event) => {
-            if (event.target.classList === 'Dialogger-coverup') {
+            if (event.target.className === 'Dialogger-coverup') {
                 e.hide();
             }
         });

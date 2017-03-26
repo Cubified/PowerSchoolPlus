@@ -12,7 +12,7 @@ function InitThemes() {
         location.reload();
     };
     const changeTheme = () => {
-        if (location.href == 'https://sis.henrico.k12.va.us/public/home.html' || location.href == 'https://sis.henrico.k12.va.us/public/') {
+        if (location.href === 'https://sis.henrico.k12.va.us/public/home.html' || location.href === 'https://sis.henrico.k12.va.us/public/') {
             const link = document.createElement('select');
             link.id = 'changeTheme';
             getTheme((data) => {
@@ -20,38 +20,16 @@ function InitThemes() {
                     document.getElementById('changeTheme').value = data.theme;
                 }
             });
-            const optionTwo = document.createElement('option');
-            optionTwo.value = 'red';
-            optionTwo.innerHTML = 'Red';
-            const optionThree = document.createElement('option');
-            optionThree.value = 'pink';
-            optionThree.innerHTML = 'Pink';
-            const optionSix = document.createElement('option');
-            optionSix.value = 'orange';
-            optionSix.innerHTML = 'Orange';
-            const optionSeven = document.createElement('option');
-            optionSeven.value = 'yellow';
-            optionSeven.innerHTML = 'Yellow';
-            const optionFive = document.createElement('option');
-            optionFive.value = 'green';
-            optionFive.innerHTML = 'Green';
-            const optionFour = document.createElement('option');
-            optionFour.value = 'cyan';
-            optionFour.innerHTML = 'Cyan';
-            const optionOne = document.createElement('option');
-            optionOne.value = 'blue';
-            optionOne.innerHTML = 'Blue';
-            link.appendChild(optionTwo);
-            link.appendChild(optionThree);
-            link.appendChild(optionSix);
-            link.appendChild(optionSeven);
-            link.appendChild(optionFive);
-            link.appendChild(optionFour);
-            link.appendChild(optionOne);
+            link.innerHTML = `<option value="red">Red</option><option value="pink">Pink</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="cyan">Cyan</option><option value="blue">Blue</option>`;
             document.getElementById('login-help').appendChild(link);
-            link.onchange = () => {
-                updateTheme(document.getElementById('changeTheme').value);
-            }
+
+            // I have NO IDEA why what I had before stopped working.
+
+            document.getElementById('login-inputs').onchange = (e)=>{
+                if(e.target === document.getElementById('changeTheme')){
+                    updateTheme(document.getElementById('changeTheme').value);
+                }
+            };
         }
     };
     changeTheme();
