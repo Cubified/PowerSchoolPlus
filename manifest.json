@@ -25,6 +25,7 @@
   ],
   "icons": {
     "512": "icons/512x512.png",
+    "128": "icons/128x128.png",
     "48": "icons/48x48.png"
   },
   "permissions": [
