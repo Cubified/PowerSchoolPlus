@@ -3,6 +3,7 @@
 <head>
     <title>Grade History</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="../css/waves.min.css" rel="stylesheet">
     <style>
         html, body {
             margin: 0;
@@ -11,10 +12,21 @@
             background: #f3f3f3;
         }
 
-        h1, span {
+        h1, span, #cleardata {
             font-family: "Open Sans", sans-serif;
             text-align: center;
             display: block;
+        }
+
+        #cleardata{
+            display:none;
+        }
+        .center{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            width:100vw;
         }
     </style>
 </head>
@@ -22,8 +34,15 @@
 <h1 id='quarter'></h1>
 <span>Please note that this functionality is still very much in its alpha stage, meaning likely will have bugs</span>
 <br>
+<div class='center'>
+    <div>
+        <button id='cleardata'>Clear grade history for this quarter</button>
+    </div>
+</div>
+<br>
 <canvas width='800' height='200'></canvas>
 <script src="../lib/Chart.min.js"></script>
+<script src="../lib/waves.min.js"></script>
 <script src="../lib/Please.min.js"></script>
 <script src="../lib/History.js"></script>
 </body>

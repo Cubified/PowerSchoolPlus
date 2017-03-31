@@ -9,13 +9,13 @@ const loadSettings = (callback) => {
     chrome.storage.sync.get('settings', callback);
 };
 
-function InitMenuOption() {
+function InitMenuOption(ver) {
     try {
         const dialog = document.createElement('div');
         dialog.id = 'dialog-psp';
         dialog.classList.add('Dialogger');
         dialog.innerHTML = `<div><div>
-			<h1>HCPS PowerSchool Plus v0.2.7</h1>
+			<h1>HCPS PowerSchool Plus v${ver}</h1>
 			<br>
 			<a href="chrome-extension://${chrome.runtime.id}/src/html/note.html">A note about grade calculation</a>
             <br>
@@ -26,7 +26,12 @@ function InitMenuOption() {
             <label for="toggle-preferredname">Enable preferred name: </label><input type='checkbox' checked id="toggle-preferredname"><br>
             <label for="toggle-themes">Enable themes: </label><input type='checkbox' checked id="toggle-themes"><br>
             <label for="toggle-notifications">Enable login screen notifications: </label><input type='checkbox' checked id="toggle-notifications"><br>
-            <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator">
+            <label for="toggle-indicator">Enable grade change indicator: </label><input type='checkbox' checked id="toggle-indicator"><br>
+            <label>Grade entry spacing:  </label><select id="gradedisplay">
+                <option value="default" selected>Default</option>
+                <option value="narrow">Narrow</option>
+                <option value="comfy">Comfy</option>
+            </select>
             <br><br>(Changes will come into effect when this dialog is closed)</div></div>
 		`;
         document.body.appendChild(dialog);
@@ -39,6 +44,12 @@ function InitMenuOption() {
             }
         });
 
+        chrome.storage.sync.get('gradedisplay',(data)=>{
+            if(data.gradedisplay !== undefined) {
+                document.getElementById('gradedisplay').value = data.gradedisplay;
+            }
+        });
+
         Dialogger({
             onClose: function () {
                 const json = {};
@@ -46,6 +57,7 @@ function InitMenuOption() {
                     json[e.id.split('toggle-')[1]] = e.checked;
                 });
                 saveSettings(json);
+                chrome.storage.sync.set({'gradedisplay':document.getElementById('gradedisplay').value});
                 location.reload();
             }
         });

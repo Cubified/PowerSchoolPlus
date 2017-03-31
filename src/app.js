@@ -10,7 +10,10 @@ const InitCalc = require('./InitCalc.js'),
     InitNotifications = require('./InitNotifications.js'),
     InitMenuOption = require('./InitMenuOption.js'),
     InitGradeIndicator = require('./InitGradeIndicator.js'),
-    InitGradeHistory = require('./InitGradeHistory.js');
+    InitGradeHistory = require('./InitGradeHistory.js'),
+    InitGradeDisplayStyle = require('./InitGradeDisplayStyle.js');
+
+const ver = '3.0.0';
 
 function PowerSchoolPlus() {
     this.init = () => {
@@ -29,12 +32,13 @@ function PowerSchoolPlus() {
                     InitThemes();
                 }
                 if (data.settings.notifications) {
-                    InitNotifications();
+                    InitNotifications(ver);
                 }
                 if (data.settings.indicator) {
                     InitGradeIndicator();
                 }
-                InitMenuOption();
+                InitGradeDisplayStyle();
+                InitMenuOption(ver);
                 InitGradeHistory();
             }
             else {
@@ -42,9 +46,9 @@ function PowerSchoolPlus() {
                 InitWaves();
                 InitPreferredName();
                 InitThemes();
-                InitNotifications();
+                InitNotifications(ver);
                 InitGradeIndicator();
-                InitMenuOption();
+                InitMenuOption(ver);
                 InitGradeHistory();
             }
         });

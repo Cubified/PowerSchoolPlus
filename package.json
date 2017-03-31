@@ -1,6 +1,6 @@
 {
   "name": "powerschoolplus",
-  "version": "0.2.7",
+  "version": "3.0.0",
   "description": "A general enhancements suite for HCPS PowerSchool.",
   "main": "src/app.js",
   "scripts": {

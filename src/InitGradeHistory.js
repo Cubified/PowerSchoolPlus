@@ -34,30 +34,35 @@ const convertGradesToJSON = (grades) => {
     });
     return out;
 };
+const getMax = (arr, prop)=>{
+    let max;
+    for (let i=0 ; i<arr.length ; i++) {
+        if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+            max = arr[i];
+    }
+    return max;
+};
 
 const loadGrades = (callback) => {
     chrome.storage.local.get('gradehistory', callback);
 };
 const saveGrades = (json) => {
-    let difference = false;
-    // This could be better, to say the least
     loadGrades((data) => {
-        if (data.gradehistory !== undefined) {
-            data.gradehistory.forEach((e) => {
-                e.grades.forEach((el) => {
-                    json.grades.forEach((ele) => {
-                        if (el.class === ele.class && el.quarter === ele.quarter) {
-                            if (el.grade !== ele.grade) {
-                                difference = true;
-                            }
-                        }
-                    });
+        let difference = false;
+
+        if(data.gradehistory !== undefined && data.gradehistory.length > 0) {
+            getMax(data.gradehistory,'date').grades.forEach((el)=>{
+                json.grades.forEach((ele) => {
+                    if (el.class === ele.class && el.quarter === ele.quarter && el.grade !== ele.grade) {
+                        difference = true;
+                    }
                 });
             });
         }
-        else {
+        else{
             difference = true;
         }
+
         const temp = (data.gradehistory === undefined ? [] : data.gradehistory);
         temp.push(json);
         if (difference) {

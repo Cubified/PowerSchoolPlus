@@ -94,7 +94,17 @@ loadGrades((data) => {
         });
 
         document.getElementById('quarter').innerHTML = quarter.replace('Q', 'Quarter ') + ' Grade History';
+
+        document.querySelector('#cleardata').style.background = Please.make_color({format:'rgb-string'});
+        Waves.attach('#cleardata',['waves-button', 'waves-light', 'waves-float']);
+        Waves.init();
+        document.querySelector('#cleardata').style.display = 'block';
     } else {
         document.getElementById('quarter').innerHTML = 'You do not have enough grade history to create a graph';
     }
 });
+
+document.querySelector('#cleardata').onclick=()=>{
+    chrome.storage.local.set({'gradehistory':undefined});
+    location.reload();
+};
