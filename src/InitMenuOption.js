@@ -50,7 +50,7 @@ function InitMenuOption(ver) {
             }
         });
 
-        Dialogger({
+        Dialogger(dialog,{
             onClose: function () {
                 const json = {};
                 [].forEach.call(document.getElementById('dialog-psp').querySelectorAll('input'), (e) => {

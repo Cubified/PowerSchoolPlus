@@ -16,6 +16,11 @@ input {
     cursor: pointer;
 }
 
+button{
+   background: #3F51B5 !important;
+   color:white !important;
+}
+
 button.blue,
 #signin-custom-message.enabled.blue {
     background: #3F51B5 !important;
@@ -115,6 +120,8 @@ td.yellow {
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer;
+    color:white;
+    background:rgb(63,81,181);
 }
 
 .button-options {
@@ -159,6 +166,6 @@ td.yellow {
     line-height:3;
 }
 
-#addGradeButton{
+.waves-button{
     z-index:0;
 }
