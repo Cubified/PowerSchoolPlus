@@ -53,7 +53,7 @@ const saveGrades = (json) => {
         if(data.gradehistory !== undefined && data.gradehistory.length > 0) {
             getMax(data.gradehistory,'date').grades.forEach((el)=>{
                 json.grades.forEach((ele) => {
-                    if (el.class === ele.class && el.quarter === ele.quarter && el.grade !== ele.grade) {
+                    if (!isNaN(el.grade) && !isNaN(ele.grade) && el.class === ele.class && el.quarter === ele.quarter && el.grade !== ele.grade) {
                         difference = true;
                     }
                 });
