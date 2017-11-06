@@ -105,6 +105,29 @@ td.yellow {
     color: black !important;
 }
 
+button.purple,
+#signin-custom-message.enabled.purple {
+    background: #9C27B0 !important;
+}
+
+th.purple,
+td.purple {
+    background: #CE93D8 !important;
+    color: black !important;
+}
+
+button.gray,
+#signin-custom-message.enabled.gray {
+    background: #9E9E9E !important;
+	color:black !important;
+}
+
+th.gray,
+td.gray {
+    background: #BDBDBD !important;
+    color: black !important;
+}
+
 .faded {
     opacity: 0.6;
 }

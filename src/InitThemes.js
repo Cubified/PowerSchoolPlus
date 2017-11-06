@@ -27,7 +27,9 @@ function InitThemes() {
 				'Yellow',
 				'Green',
 				'Cyan',
-				'Blue'
+				'Blue',
+				'Purple',
+				'Gray'
 			];
 			themeNames.forEach((e)=>{
 				link.innerHTML += `<option value="${e.toLowerCase()}">${e}</option>`;
