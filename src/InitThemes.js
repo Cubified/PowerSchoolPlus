@@ -20,7 +20,19 @@ function InitThemes() {
                     document.getElementById('changeTheme').value = data.theme;
                 }
             });
-            link.innerHTML = `<option value="red">Red</option><option value="pink">Pink</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="cyan">Cyan</option><option value="blue">Blue</option>`;
+			const themeNames = [
+				'Red',
+				'Pink',
+				'Orange',
+				'Yellow',
+				'Green',
+				'Cyan',
+				'Blue'
+			];
+			themeNames.forEach((e)=>{
+				link.innerHTML += `<option value="${e.toLowerCase()}">${e}</option>`;
+			});
+//            link.innerHTML = `<option value="red">Red</option><option value="pink">Pink</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="cyan">Cyan</option><option value="blue">Blue</option>`;
             document.getElementById('login-help').appendChild(link);
 
             // I have NO IDEA why what I had before stopped working.

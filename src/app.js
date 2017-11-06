@@ -1,5 +1,5 @@
 /*
- * HCPS PowerSchool Plus v0.2.7
+ * HCPS PowerSchool Plus v3.0.0
  * Andrew Russell 2017
  */
 

@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "HCPS PowerSchool Plus",
+  "name": "HCPS PowerSchool Plus (Development)",
   "short_name": "PowerSchool Plus",
   "version": "3.0.0",
   "description": "A general enhancements suite for HCPS PowerSchool.",
