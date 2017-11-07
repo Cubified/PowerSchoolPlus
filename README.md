@@ -11,8 +11,7 @@ HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 * Ability to enable/disable features
 
 # Planned Features
-* Custom/user created themes
-* More fleshed out notifications
+* Ability to view newly added grades
 
 # Setup and Installation
 1. `git clone "https://github.com/Cubified/PowerSchoolPlus"`
