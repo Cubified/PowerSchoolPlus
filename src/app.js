@@ -18,7 +18,7 @@ const InitCalc = require('./InitCalc.js'),
     InitGradeIndicator = require('./InitGradeIndicator.js'),
     InitGradeHistory = require('./InitGradeHistory.js'),
     InitGradeDisplayStyle = require('./InitGradeDisplayStyle.js'),
-	InitSmallFixes = require('./InitSmallFixes.js');
+    InitSmallFixes = require('./InitSmallFixes.js');
 
 const ver = '3.5.0';
 
@@ -47,7 +47,7 @@ function PowerSchoolPlus() {
                 InitGradeDisplayStyle();
                 InitMenuOption(ver);
                 InitGradeHistory();
-				InitSmallFixes();
+                InitSmallFixes();
             }
             else {
                 InitCalc();
@@ -58,7 +58,7 @@ function PowerSchoolPlus() {
                 InitGradeIndicator();
                 InitMenuOption(ver);
                 InitGradeHistory();
-				InitSmallFixes();
+                InitSmallFixes();
             }
         });
     };
