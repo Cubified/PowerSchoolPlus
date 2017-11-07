@@ -5,9 +5,8 @@
 
 /*
  * TODO:
- * - Fix strange visual anomaly on login screen where form elements seem to scale down (occasionally reproducible, almost seems random)
- * - Fix border along bottom row of attendance/grades table
- * - Fix grade history being recorded upon every visit (also occasionally reproducible)
+ * - Fix border along bottom row of attendance/grades table (can't fix well - won't fix)
+ * - Fix grade history being recorded upon every visit (occasionally reproducible)
  */
 
 const InitCalc = require('./InitCalc.js'),
@@ -18,7 +17,8 @@ const InitCalc = require('./InitCalc.js'),
     InitMenuOption = require('./InitMenuOption.js'),
     InitGradeIndicator = require('./InitGradeIndicator.js'),
     InitGradeHistory = require('./InitGradeHistory.js'),
-    InitGradeDisplayStyle = require('./InitGradeDisplayStyle.js');
+    InitGradeDisplayStyle = require('./InitGradeDisplayStyle.js'),
+	InitSmallFixes = require('./InitSmallFixes.js');
 
 const ver = '3.0.0';
 
@@ -47,6 +47,7 @@ function PowerSchoolPlus() {
                 InitGradeDisplayStyle();
                 InitMenuOption(ver);
                 InitGradeHistory();
+				InitSmallFixes();
             }
             else {
                 InitCalc();
@@ -57,6 +58,7 @@ function PowerSchoolPlus() {
                 InitGradeIndicator();
                 InitMenuOption(ver);
                 InitGradeHistory();
+				InitSmallFixes();
             }
         });
     };
