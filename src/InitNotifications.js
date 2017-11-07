@@ -1,5 +1,7 @@
+const utils = require('./lib/PowerSchoolUtil.js');
+
 function InitNotifications(ver) {
-    if (location.href === 'https://sis.henrico.k12.va.us/public/home.html' || location.href === 'https://sis.henrico.k12.va.us/public/') {
+    if (utils.IsLoginScreen()) {
         if (document.getElementById('signin-custom-message') === null) {
             document.querySelector('fieldset').innerHTML += '<div id="signin-custom-message"></div>';
         }

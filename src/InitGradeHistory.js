@@ -73,8 +73,10 @@ const saveGrades = (json) => {
     });
 };
 
+const utils = require('./lib/PowerSchoolUtil.js');
+
 function InitGradeHistory() {
-    if (location.href === "https://sis.henrico.k12.va.us/guardian/home.html") {
+    if (!utils.IsLoginScreen() && !utils.IsScoresScreen()) {
         saveGrades(convertGradesToJSON(getGrades()));
     }
 }

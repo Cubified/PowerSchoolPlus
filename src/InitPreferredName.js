@@ -1,3 +1,5 @@
+const utils = require('./lib/PowerSchoolUtil.js');
+
 function InitPreferredName() {
     let setName = window.setName = (newName) => {
         chrome.storage.sync.set({
@@ -8,7 +10,7 @@ function InitPreferredName() {
     let getName = window.getName = (callback) => {
         chrome.storage.sync.get('preferredName', callback);
     };
-    if (location.href.indexOf('https://sis.henrico.k12.va.us/guardian/') > -1) {
+	if(!utils.IsLoginScreen()){
         document.querySelectorAll('#userName > span')[0].addEventListener('click', () => {
             const response = prompt('Enter preferred name:');
             if (response !== null) {

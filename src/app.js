@@ -3,6 +3,13 @@
  * Andrew Russell 2017
  */
 
+/*
+ * TODO:
+ * - Fix strange visual anomaly on login screen where form elements seem to scale down (occasionally reproducible, almost seems random)
+ * - Fix border along bottom row of attendance/grades table
+ * - Fix grade history being recorded upon every visit (also occasionally reproducible)
+ */
+
 const InitCalc = require('./InitCalc.js'),
     InitWaves = require('./InitWaves.js'),
     InitPreferredName = require('./InitPreferredName.js'),

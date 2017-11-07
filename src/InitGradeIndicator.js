@@ -43,8 +43,10 @@ const loadGrades = (callback) => {
     chrome.storage.sync.get('grades', callback);
 };
 
+const utils = require('./lib/PowerSchoolUtil.js');
+
 function InitGradeIndicator() {
-    if (location.href === "https://sis.henrico.k12.va.us/guardian/home.html") {
+    if (!utils.IsLoginScreen() && !utils.IsScoresScreen()) {
         loadGrades((data) => {
             if (data.grades !== undefined && data.grades !== null) {
                 data.grades.forEach((e) => {
