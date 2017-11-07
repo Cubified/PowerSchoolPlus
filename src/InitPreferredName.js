@@ -10,7 +10,7 @@ function InitPreferredName() {
     let getName = window.getName = (callback) => {
         chrome.storage.sync.get('preferredName', callback);
     };
-	if(!utils.IsLoginScreen()){
+	if(!utils.IsLoginScreen() && document.querySelector('#userName')){
         document.querySelectorAll('#userName > span')[0].addEventListener('click', () => {
             const response = prompt('Enter preferred name:');
             if (response !== null) {

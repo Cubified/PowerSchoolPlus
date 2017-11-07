@@ -46,7 +46,7 @@ const loadGrades = (callback) => {
 const utils = require('./lib/PowerSchoolUtil.js');
 
 function InitGradeIndicator() {
-    if (!utils.IsLoginScreen() && !utils.IsScoresScreen()) {
+    if (!utils.IsLoginScreen() && !utils.IsScoresScreen() && document.querySelectorAll('tr.center.th2')[0]) {
         loadGrades((data) => {
             if (data.grades !== undefined && data.grades !== null) {
                 data.grades.forEach((e) => {

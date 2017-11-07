@@ -76,7 +76,7 @@ const saveGrades = (json) => {
 const utils = require('./lib/PowerSchoolUtil.js');
 
 function InitGradeHistory() {
-    if (!utils.IsLoginScreen() && !utils.IsScoresScreen()) {
+    if (!utils.IsLoginScreen() && !utils.IsScoresScreen() && document.querySelectorAll('tr.center.th2')[0]) {
         saveGrades(convertGradesToJSON(getGrades()));
     }
 }
