@@ -48,6 +48,9 @@ const findNewestQuarter = (grades) => {
     });
     return out;
 };
+const setNewestQuarter = (quarter) => {
+	chrome.storage.local.set({'newestquarter':quarter});
+};
 
 const ctx = document.querySelector('canvas');
 
@@ -55,6 +58,7 @@ loadGrades((data) => {
     if (data.gradehistory !== undefined && data.gradehistory.length > 1) {
         const classes = [],
             quarter = findNewestQuarter(data.gradehistory);
+		setNewestQuarter(quarter);
         data.gradehistory[0].grades.forEach((e) => {
             if (classes.indexOf(e.class) === -1) {
                 classes.push(e.class);
@@ -105,6 +109,6 @@ loadGrades((data) => {
 });
 
 document.querySelector('#cleardata').onclick=()=>{
-    chrome.storage.local.set({'gradehistory':undefined});
+    chrome.storage.local.set({'gradehistory':[]});
     location.reload();
 };

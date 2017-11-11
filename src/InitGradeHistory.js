@@ -69,15 +69,49 @@ const saveGrades = (json) => {
             chrome.storage.local.set({
                 'gradehistory': temp
             });
+			console.log('saving grades');
         }
     });
+};
+const findNewestQuarter = (grades) => {
+    let out = 'Q1';
+    grades.forEach((e) => {
+        e.grades.forEach((el) => {
+            if (el.quarter.indexOf('Q') > -1) {
+                if (getNumbersInString(out) < getNumbersInString(el.quarter)) {
+                    out = el.quarter;
+                }
+            }
+        });
+    });
+    return out;
+};
+const shouldClearGrades = (callback)=>{
+	chrome.storage.local.get('newestquarter',(data)=>{
+		loadGrades((grades)=>{
+			console.log(data.newestquarter, findNewestQuarter(grades.gradehistory));
+			callback(data.newestquarter!==findNewestQuarter(grades.gradehistory));
+		});
+	});
+};
+const clearGrades = (callback)=>{
+    chrome.storage.local.set({'gradehistory':[]},callback);
 };
 
 const utils = require('./lib/PowerSchoolUtil.js');
 
 function InitGradeHistory() {
     if (!utils.IsLoginScreen() && !utils.IsScoresScreen() && document.querySelectorAll('tr.center.th2')[0]) {
-        saveGrades(convertGradesToJSON(getGrades()));
+		shouldClearGrades((should)=>{
+			console.log(should);
+			if(should){
+				clearGrades(()=>{
+        			saveGrades(convertGradesToJSON(getGrades()));
+				});
+			} else{
+        		saveGrades(convertGradesToJSON(getGrades()));
+			}
+		});
     }
 }
 
