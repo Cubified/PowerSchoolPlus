@@ -5,8 +5,9 @@
 
 /*
  * TODO:
+ * - Improve accuracy of grade calculator
+ * - Remake promotional image on webstore
  * - Fix border along bottom row of attendance/grades table (can't fix well - won't fix)
- * - Fix grade history being recorded upon every visit (occasionally reproducible)
  */
 
 const InitCalc = require('./InitCalc.js'),

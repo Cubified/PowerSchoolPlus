@@ -69,7 +69,6 @@ const saveGrades = (json) => {
             chrome.storage.local.set({
                 'gradehistory': temp
             });
-			console.log('saving grades');
         }
     });
 };
@@ -89,7 +88,6 @@ const findNewestQuarter = (grades) => {
 const shouldClearGrades = (callback)=>{
 	chrome.storage.local.get('newestquarter',(data)=>{
 		loadGrades((grades)=>{
-			console.log(data.newestquarter, findNewestQuarter(grades.gradehistory));
 			callback(data.newestquarter!==findNewestQuarter(grades.gradehistory));
 		});
 	});
@@ -103,7 +101,6 @@ const utils = require('./lib/PowerSchoolUtil.js');
 function InitGradeHistory() {
     if (!utils.IsLoginScreen() && !utils.IsScoresScreen() && document.querySelectorAll('tr.center.th2')[0]) {
 		shouldClearGrades((should)=>{
-			console.log(should);
 			if(should){
 				clearGrades(()=>{
         			saveGrades(convertGradesToJSON(getGrades()));

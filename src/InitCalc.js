@@ -6,7 +6,28 @@ const sumAllInArray = (v) => {
     });
     return tmp;
 };
-const calcWeightedMean = (arr) => {
+const averageForEachWeight = (arr) => {
+	let out = {};
+	arr.forEach((e)=>{
+		if(out[e.weight]){
+			out[e.weight].grade += e.grade;
+			out[e.weight].num += 1;
+		} else{
+			out[e.weight] = {grade:e.grade,num:1};
+		}
+	});
+	let temp = [];
+	for(let key in out){
+		temp.push({
+			weight:parseFloat(key),
+			grade:out[key].grade/out[key].num
+		});
+	}
+	return temp;
+};
+const calcWeightedMean = (array) => {
+	let arr = averageForEachWeight(array);
+
     const t = [],
         w = [];
     arr.forEach((e, i, a) => {
@@ -41,21 +62,55 @@ const calculateLetterGrade = (grade) => {
     return temp;
 };
 
+const defaults = {
+	Homework: 15,
+	Classwork: 15,
+	Quiz: 30,
+	Test: 40,
+	Project: 40
+};
+
+// Heuristic used to determine the weight of a grading category
+// without a percentage listed in its name
+const determineWeight = (category) => {	
+	if(getNumbersInString(category) === ''){
+		let weight = 15;
+		for(let key in defaults){
+			if(category.toLowerCase().indexOf(key.toLowerCase()) > -1){
+				weight = defaults[key];
+			}
+		}
+		return weight;
+	} else {
+		return parseFloat(getNumbersInString(category));
+	}
+};
+
+const ComboBox = require('./lib/ComboBox.min.js');
+
 // The main calculator class
 class Calculator {
     constructor(currentGrade, gradeContainer, addedGradesContainer) {
         this.currentGrade = currentGrade;
-        this.activeGrades = [{
-            weight: 100,
-            grade: currentGrade
-        }];
-        this.allGrades = [{
-            weight: 100,
-            grade: currentGrade
-        }];
+		this.activeGrades = this.getExistingGrades();
+		this.allGrades = this.getExistingGrades();
         this.gradeContainer = gradeContainer;
         this.addedGradesContainer = addedGradesContainer;
     }
+
+	getExistingGrades(){
+		let elements = document.querySelectorAll('#assignmentScores > table > tbody > tr'),
+			out = [];
+		[].forEach.call(elements,(e)=>{
+			if(e.children.length > 8){
+				out.push({
+					weight:determineWeight(e.children[1].innerText),
+					grade:parseFloat(getNumbersInString(e.children[5].innerText))
+				});
+			}
+		});
+		return out;
+	}
 
     idIsUsed(id) {
         let hit = false;
@@ -160,7 +215,7 @@ class Calculator {
 
     attach(elem, weight, grade, calc) {
         elem.addEventListener('click', () => {
-            if (weight.value !== '' && grade.value !== '') {
+            if ((weight.value !== '' && grade.value !== '') && !isNaN(parseFloat(weight.value))) {
                 calc.addNewGrade(parseInt(weight.value), parseInt(grade.value));
             }
             else {
@@ -179,19 +234,27 @@ function InitCalc() {
         const addGradeButton = document.createElement('button');
         addGradeButton.innerHTML = 'Add Grade';
         addGradeButton.id = 'addGradeButton';
+		const comboBoxElem = document.createElement('div');
+		comboBoxElem.id = 'combobox';
         const newWeightInput = document.createElement('input');
         newWeightInput.placeholder = 'Weight';
         newWeightInput.id = 'newWeightInput';
+		const newWeightSelect = document.createElement('select');
+		for(let key in defaults){
+			newWeightSelect.innerHTML += `<option value="${defaults[key]}">${key}</option>`;
+		}
+		comboBoxElem.appendChild(newWeightInput);
+		comboBoxElem.appendChild(newWeightSelect);
         const newGradeInput = document.createElement('input');
         newGradeInput.placeholder = 'Grade';
         newGradeInput.id = 'newGradeInput';
-        newWeightInput.type = newGradeInput.type = 'number';
+        newGradeInput.type = 'number';
 
         // Parent element for calculator
         const parentTr = document.createElement('tr');
         parentTr.innerHTML = `
     		<td>${addGradeButton.outerHTML}</td>
-    		<td>${newWeightInput.outerHTML}</td>
+    		<td>${comboBoxElem.outerHTML}</td>
     		<td>${newGradeInput.outerHTML}</td>
     	`;
 
@@ -213,6 +276,8 @@ function InitCalc() {
             document.getElementById('newGradeInput'),
             calc
         );
+
+		let combobox = new ComboBox(document.getElementById('combobox'),false);
     }
 }
 
