@@ -3,11 +3,6 @@
  * Andrew Russell 2017
  */
 
-/*
- * TODO:
- * - Remake promotional image on webstore
- */
-
 const InitCalc = require('./InitCalc.js'),
     InitWaves = require('./InitWaves.js'),
     InitPreferredName = require('./InitPreferredName.js'),
