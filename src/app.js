@@ -5,9 +5,7 @@
 
 /*
  * TODO:
- * - Improve accuracy of grade calculator
  * - Remake promotional image on webstore
- * - Fix border along bottom row of attendance/grades table (can't fix well - won't fix)
  */
 
 const InitCalc = require('./InitCalc.js'),
