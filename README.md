@@ -28,3 +28,4 @@ HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 - [Chart.js](http://www.chartjs.org/)
 - [Please.js](http://checkman.io/please/)
 - [Waves](http://fian.my.id/Waves/)
+- [ComboBox.js](https://github.com/thibaultJanBeyer/ComboBox.js)
