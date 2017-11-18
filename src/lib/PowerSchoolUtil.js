@@ -1,9 +1,9 @@
 let Utils = {
-	IsLoginScreen:()=>{
-		return (document.querySelector(`form[name="LoginForm"]`));
+	IsLoginScreen: () => {
+		return(document.querySelector(`form[name="LoginForm"]`));
 	},
-	IsScoresScreen:()=>{
-		return (location.href.indexOf('guardian/scores.html') > -1);
+	IsScoresScreen: () => {
+		return(location.href.indexOf('guardian/scores.html') > -1);
 	}
 };
 
