@@ -200,3 +200,7 @@ td.gray {
 .ui-widget-overlay{
     background:#333 !important;
 }
+
+.cb--select, .cb--option{
+	transition:none !important;
+}
