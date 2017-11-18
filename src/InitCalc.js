@@ -102,7 +102,7 @@ class Calculator {
 		let elements = document.querySelectorAll('#assignmentScores > table > tbody > tr'),
 			out = [];
 		[].forEach.call(elements,(e)=>{
-			if(e.children.length > 8){
+			if(e.children.length > 8 && !isNaN(parseFloat(getNumbersInString(e.children[5].innerText)))){
 				out.push({
 					weight:determineWeight(e.children[1].innerText),
 					grade:parseFloat(getNumbersInString(e.children[5].innerText))
