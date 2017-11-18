@@ -141,10 +141,30 @@ td.gray {
     border: none !important;
     box-shadow: none !important;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer;
     color:white;
     background:rgb(63,81,181);
+}
+
+#signin-custom-message.enabled:not(.firstrun){
+	box-shadow:0 2px 5px rgba(0,0,0,0.3) !important;
+}
+
+@keyframes pop{
+	0%{
+		box-shadow:0 10px 20px rgba(0,0,0,0.4);
+	}
+	50%{
+		box-shadow:0 2px 5px rgba(0,0,0,0.3);
+	}
+	100%{
+		box-shadow:0 10px 20px rgba(0,0,0,0.4);
+	}
+}
+
+#signin-custom-message.enabled.firstrun {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.4) !important;
+	animation: pop 2s;
 }
 
 .button-options {
