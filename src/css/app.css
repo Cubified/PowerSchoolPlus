@@ -224,3 +224,10 @@ td.gray {
 .cb--select, .cb--option{
 	transition:none !important;
 }
+
+label[for="totalPointsCheckbox"]{
+	line-height:1.9;
+}
+input#totalPointsCheckbox{
+	vertical-align:middle;
+}
