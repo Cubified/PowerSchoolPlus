@@ -1,6 +1,6 @@
 /*
- * HCPS PowerSchool Plus v3.6.0
- * Andrew Russell 2017
+ * HCPS PowerSchool Plus v3.7.0
+ * Andrew Russell 2018
  */
 
 const InitCalc = require('./InitCalc.js'),
@@ -14,7 +14,7 @@ const InitCalc = require('./InitCalc.js'),
    InitGradeDisplayStyle = require('./InitGradeDisplayStyle.js'),
    InitSmallFixes = require('./InitSmallFixes.js');
 
-const ver = '3.6.0';
+const ver = '3.7.0';
 
 function PowerSchoolPlus() {
    this.init = () => {

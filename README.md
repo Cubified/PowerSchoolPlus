@@ -1,4 +1,4 @@
-# PowerSchoolPlus v3.6.0
+# PowerSchoolPlus v3.7.0
 HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 
 # Features

@@ -7,8 +7,11 @@ function InitSmallFixes() {
       style.innerHTML = `*:not(.waves-effect):not(.waves-rippling):not(.waves-ripple){transition:none !important;}`;
       document.head.appendChild(style);
 
-	  // Focus username input box
-	  document.querySelector('#fieldAccount').focus();
+      // Focus username input box
+      document.querySelector('#fieldAccount').focus();
+   } else if(/*psKeepAlive*/0) {
+      // Disable login timeout
+      // psKeepAlive.startKeepAlive();
    }
 }
 

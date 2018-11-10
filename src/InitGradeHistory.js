@@ -69,7 +69,7 @@ const saveGrades = (json) => {
       temp.push(json);
       if(difference) {
          chrome.storage.local.set({
-            'gradehistory': temp
+            gradehistory: temp
          });
       }
    });
@@ -96,7 +96,7 @@ const shouldClearGrades = (callback) => {
 };
 const clearGrades = (callback) => {
    chrome.storage.local.set({
-      'gradehistory': []
+      gradehistory: []
    }, callback);
 };
 

@@ -2,7 +2,7 @@ const Dialogger = require('./lib/Dialogger.v2.js');
 
 const saveSettings = (json) => {
    chrome.storage.sync.set({
-      'settings': json
+      settings: json
    });
 };
 const loadSettings = (callback) => {
