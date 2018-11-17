@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "HCPS PowerSchool Plus (Development)",
   "short_name": "PowerSchool Plus",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A general enhancements suite for HCPS PowerSchool.",
   "content_scripts": [
     {
@@ -20,7 +20,6 @@
     }
   ],
   "web_accessible_resources": [
-    "src/html/note.html",
     "src/html/history.html"
   ],
   "icons": {

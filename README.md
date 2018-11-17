@@ -2,17 +2,13 @@
 HCPS PowerSchool Plus is a general enhancements suite for HCPS PowerSchool.
 
 # Features
-* Grade calculator
+* Grade calculator (with support for both weighted and total-point systems)
 * Ability to set preferred name
 * Theming
 * Grade change indicator
 * Grade history viewer
 * Button ripples
 * Ability to enable/disable features
-
-# Planned Features
-* Ability to view newly added grades
-* Support for total points
 
 # Setup and Installation
 1. `git clone "https://github.com/Cubified/PowerSchoolPlus"`

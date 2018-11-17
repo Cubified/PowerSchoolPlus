@@ -245,3 +245,10 @@ input#totalPointsCheckbox{
 table.grid td {
   border:none !important;
 }
+
+.weight-average{
+  font-weight:bold !important;
+}
+.unbold{
+  font-weight:unset !important;
+}

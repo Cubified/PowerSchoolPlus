@@ -2,145 +2,124 @@
  * InitCalc.js: Grade calculator functionality
  * 
  * Changelog:
+ * - 11/13/18:
+ *   - Add support for user-adjusted weights in weighted calculator
+ *     - Adjust Combobox to respond accordingly
+ *   - Move utility functions to PowerSchoolUtil.js
+ *   - Display average grade for each weight
  * - 11/09/18:
  *   - Fix query selector problems (due to changes to Powerschool)
  *   - Enable disabling of any existing grade with a mouse click
+ *
+ * TODO:
+ * - Exclude exempt grades
  */
 
-// Various useful functions, should be relatively self-explanatory
-const sumAllInArray = (v) => {
-   let tmp = 0;
-   v.forEach((e) => {
-      tmp += e
-   });
-   return tmp;
-};
-const averageForEachWeight = (arr) => {
-   let out = {};
-   arr.forEach((e) => {
-      if(out[e.weight]) {
-         out[e.weight].grade += e.grade;
-         out[e.weight].num += 1;
-      } else {
-         out[e.weight] = {
-            grade: e.grade,
-            num: 1
-         };
-      }
-   });
-   let temp = [];
-   for(let key in out) {
-      temp.push({
-         weight: parseFloat(key),
-         grade: out[key].grade / out[key].num
-      });
-   }
-   return temp;
-};
-const calcWeightedMean = (array) => {
-   let arr = averageForEachWeight(array);
+const ComboBox = require('./lib/ComboBox.min.js'),
+      util     = require('./lib/PowerSchoolUtil.js');
 
-   const t = [],
-      w = [];
-   arr.forEach((e, i, a) => {
-      t.push(e.grade * e.weight);
-      w.push(e.weight);
-   });
-   const n = sumAllInArray(t);
-   return(n / sumAllInArray(w));
-};
-const calcUnweightedMean = (array) => {
-   let totalGrade = 0,
-      totalWeight = 0;
-   array.forEach((e) => {
-      totalGrade += e.grade;
-      totalWeight += e.weight;
-   });
-   return(totalGrade / totalWeight) * 100;
-};
-
-const getNumbersInString = (str) => {
-   let out = '';
-   str.split('').forEach((e) => {
-      if('0123456789.'.split('').indexOf(e) > -1) {
-         out += e
-      }
-   });
-   return out;
-};
-
-const calculateLetterGrade = (grade) => {
-   const grades = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
-   const floors = [97, 93, 90, 87, 83, 80, 77, 73, 70, 68, 66, 60, 0];
-   let temp = '',
-      hit = false;
-   grades.forEach((e, i) => {
-      if(grade >= floors[i] && !hit) {
-         temp = e;
-         hit = true;
-      }
-   });
-   return temp;
-};
-
-const defaults = {
-   Homework: 15,
-   Classwork: 15,
-   Quiz: 30,
-   Test: 40,
-   Project: 40
-};
-
-// Heuristic used to determine the weight of a grading category
-// without a percentage listed in its name
-const determineWeight = (category) => {
-   if(getNumbersInString(category) === '') {
-      let weight = 15;
-      for(let key in defaults) {
-         if(category.toLowerCase().indexOf(key.toLowerCase()) > -1) {
-            weight = defaults[key];
-         }
-      }
-      return weight;
-   } else {
-      return parseFloat(getNumbersInString(category));
-   }
-};
-
-// Calculation strategy generic
 class CalculationStrategy {
-   constructor(calculationFunc, weightHeuristic, gradeHeuristic, gradeDisplayFunc) {
+   constructor(calculationFunc, determineWeight, determineGrade, gradeDisplayFunc, onInit, onDetach) {
       this.calculate = calculationFunc;
-      this.determineWeight = weightHeuristic;
-      this.determineGrade = gradeHeuristic;
+      this.determineWeight = determineWeight;
+      this.determineGrade = determineGrade;
       this.determineGradeDisplay = gradeDisplayFunc;
+      this.onInit = onInit;
+      this.onDetach = onDetach;
    }
 }
-// Specific calculation strategies
-const WeightedCalculator = new CalculationStrategy((grades) => {
-   return calcWeightedMean(grades).toFixed(1);
+
+const WeightedCalculator = new CalculationStrategy((grades) =>{
+   util.updateAverages(grades);
+   return util.calcWeightedMean(grades).toFixed(1);
 }, (el) => {
-   return determineWeight(el.children[1].innerText);
+   let e = document.querySelector(`input#${util.makeSafeString(el.children[1].innerText)}`);
+   if(e){
+     return parseFloat(e.value);
+   }
+   return util.guessWeight(el.children[1].innerText);
 }, (el) => {
-   return parseFloat(getNumbersInString(el.children[9].innerText))
+   return parseFloat(util.getNumbersInString(el.children[9].innerText));
 }, (weight, grade) => {
    const date = new Date();
    return `
-		<td>${((date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
-		<td>${weight + '%'}</td>
-		<td>New Grade (Click to Disable)</td>
+    <td>${((date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
+    <td>${weight + '%'}</td>
+    <td>New Grade (Click to Disable)</td>
     <td width="14"></td>
-		<td width="14"></td>
-		<td width="14"></td>
-		<td width="14"></td>
-		<td width="19"></td>
-		<td align="center">${parseFloat(grade.toFixed(2)) + '/100'}</td>
-		<td align="center">${parseFloat(grade.toFixed(2)) + '%'}</td>
-		<td align="center">${calculateLetterGrade(grade)}</td></tr>
-	`;
+    <td width="14"></td>
+    <td width="14"></td>
+    <td width="14"></td>
+    <td width="19"></td>
+    <td align="center">${parseFloat(grade.toFixed(2)) + '/100'}</td>
+    <td align="center">${parseFloat(grade.toFixed(2)) + '%'}</td>
+    <td align="center">${util.calculateLetterGrade(grade)}</td></tr>
+  `;
+}, (calc)=>{
+  let box = document.createElement('div');
+  box.classList.add('box-round');
+  box.classList.add('weights');
+ 
+  let h2 = document.createElement('h2');
+  h2.innerText = 'Weights';
+  box.appendChild(h2);
+
+  let table = document.createElement('table');
+  let tbody = document.createElement('tbody');
+
+  let weights = util.getExistingWeights();
+  let grades = calc.getExistingGrades();
+  let avgs = util.averageForEachWeight(grades);
+
+  let tr0 = document.createElement('tr');
+  tr0.innerHTML = '<th>Category</th><th>Weight</th><th>Average Grade</th>';
+  tbody.appendChild(tr0);
+
+  weights.forEach((e,i)=>{
+    let tr = document.createElement('tr');
+
+    let td1 = document.createElement('td');
+    let td2 = document.createElement('td');
+    let td3 = document.createElement('td');
+
+    let label = document.createElement('label');
+    label.classList.add('unbold');
+    label.innerText = e;
+    label.htmlFor = util.makeSafeString(e);
+
+    let input = document.createElement('input');
+    input.type = 'number';
+    input.id = util.makeSafeString(e);
+    input.value = util.guessWeight(e);
+    input.addEventListener('keydown',(e)=>{
+      if(e.keyCode === 13 && input.value.trim() !== ''){
+        calc.recalculateGrade();
+        util.updateCombobox();
+      }
+    });
+
+    let avg = document.createElement('span');
+    avg.classList.add('weight-average');
+    avg.innerText = `${avgs[i].grade.toFixed(1)}%`;  
+
+    td1.appendChild(label);
+    td2.appendChild(input);
+    td3.appendChild(avg);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  box.appendChild(table);
+
+  document.querySelector('#content-main').insertBefore(box,document.querySelector('#legend'));
+}, ()=>{
+  document.querySelector('#content-main').removeChild(document.querySelector('.box-round.weights'));
 });
 const TotalPointCalculator = new CalculationStrategy((grades) => {
-   return calcUnweightedMean(grades).toFixed(1);
+   return util.calcUnweightedMean(grades).toFixed(1);
 }, (el) => {
    return parseFloat(el.children[8].innerText.split('/')[1]);
 }, (el) => {
@@ -148,26 +127,29 @@ const TotalPointCalculator = new CalculationStrategy((grades) => {
 }, (weight, grade) => {
    const date = new Date();
    return `
-   		<td>${((date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
-   		<td>${weight} Points</td>
-   		<td>New Grade (Click to Disable)</td>
+      <td>${((date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1)) + '/' + date.getDate() + '/' + date.getUTCFullYear()}</td>
+      <td>${weight} Points</td>
+      <td>New Grade (Click to Disable)</td>
       <td width="14"></td>
       <td width="14"></td>
       <td width="14"></td>
       <td width="14"></td>
       <td width="19"></td>
-   		<td align="center">${parseFloat(grade.toFixed(2))}/${weight}</td>
-   		<td align="center">${parseFloat(((grade.toFixed(2)/weight)*100).toFixed(2))}%</td>
-   		<td align="center">${calculateLetterGrade((grade/weight)*100)}</td></tr>
-   	`;
+      <td align="center">${parseFloat(grade.toFixed(2))}/${weight}</td>
+      <td align="center">${parseFloat(((grade.toFixed(2)/weight)*100).toFixed(2))}%</td>
+      <td align="center">${util.calculateLetterGrade((grade/weight)*100)}</td></tr>
+    `;
+}, ()=>{
+}, ()=>{
 });
-
-const ComboBox = require('./lib/ComboBox.min.js');
 
 class Calculator {
    constructor(strategy, currentGrade, gradeContainer, addedGradesContainer) {
       this.strategy = strategy;
       this.currentGrade = currentGrade;
+
+      this.strategy.onInit(this);
+
       this.activeGrades = this.getExistingGrades(1);
       this.allGrades = this.getExistingGrades();
       this.gradeContainer = gradeContainer;
@@ -180,7 +162,7 @@ class Calculator {
          out = [],
          id = '';
       [].forEach.call(elements, (e) => {
-        if(e.children.length > 8 && !isNaN(parseFloat(getNumbersInString(e.children[9].innerText)))) {
+        if(e.children.length > 8 && !isNaN(parseFloat(util.getNumbersInString(e.children[9].innerText)))) {
           id = (e.dataset.id || this.generateId(8,1));
           out.push({
             weight: this.strategy.determineWeight(e),
@@ -232,7 +214,7 @@ class Calculator {
    }
 
    displayGrade() {
-      this.gradeContainer.innerHTML = `(${calculateLetterGrade(this.currentGrade)}&nbsp;&nbsp;&nbsp;${this.currentGrade}%)&nbsp;&nbsp;&nbsp;`;
+      this.gradeContainer.innerHTML = `(${util.calculateLetterGrade(this.currentGrade)}&nbsp;&nbsp;&nbsp;${this.currentGrade}%)&nbsp;&nbsp;&nbsp;`;
    }
 
    disableGrade(id) {
@@ -254,6 +236,20 @@ class Calculator {
    calculateGrade() {
       this.currentGrade = this.strategy.calculate(this.activeGrades);
       this.displayGrade();
+   }
+
+   recalculateGrade() {
+     this.activeGrades.forEach((e)=>{
+       if(!e.added){
+        e.weight = this.strategy.determineWeight(document.querySelector(`[data-id="${e.id}"]`));
+       }
+     });
+     this.allGrades.forEach((e)=>{
+       if(!e.added){
+        e.weight = this.strategy.determineWeight(document.querySelector(`[data-id="${e.id}"]`));
+       }
+     });
+     this.calculateGrade();
    }
 
    showAddedGrade(weight, grade, id) {
@@ -289,7 +285,8 @@ class Calculator {
       const newGrade = {
          weight: weight,
          grade: grade,
-         id: this.generateId(8)
+         id: this.generateId(8),
+         added: true
       };
       this.allGrades.push(newGrade);
       this.activeGrades.push(newGrade);
@@ -330,6 +327,7 @@ class Calculator {
         }
       });
       this.gradeContainer.innerHTML = '';
+      this.strategy.onDetach();
    }
 }
 
@@ -348,9 +346,10 @@ function InitCalc() {
       newWeightInput.placeholder = 'Weight';
       newWeightInput.id = 'newWeightInput';
       const newWeightSelect = document.createElement('select');
-      for(let key in defaults) {
-         newWeightSelect.innerHTML += `<option value="${defaults[key]}">${key}</option>`;
-      }
+      const weights = util.getExistingWeights();
+      weights.forEach((e)=>{
+         newWeightSelect.innerHTML += `<option value="${util.guessWeight(e)}">${e}</option>`;
+      });
       comboBoxElem.appendChild(newWeightInput);
       comboBoxElem.appendChild(newWeightSelect);
       const totalPointsLabel = document.createElement('label');
@@ -384,7 +383,7 @@ function InitCalc() {
       // Initialize the calculator
       let calc = new Calculator(
          WeightedCalculator,
-         parseFloat(getNumbersInString(document.querySelectorAll('tbody')[0].children[1].children[3].innerText)).toFixed(1),
+         parseFloat(util.getNumbersInString(document.querySelectorAll('tbody')[0].children[1].children[3].innerText)).toFixed(1),
          document.getElementById('recalculatedGrade'),
          document.querySelectorAll('tbody')[1]
       );
@@ -400,7 +399,7 @@ function InitCalc() {
 
          calc = new Calculator(
             (totalPointsCheckbox.checked ? TotalPointCalculator : WeightedCalculator),
-            parseFloat(getNumbersInString(document.querySelectorAll('tbody')[0].children[1].children[3].innerText)).toFixed(1),
+            parseFloat(util.getNumbersInString(document.querySelectorAll('tbody')[0].children[1].children[3].innerText)).toFixed(1),
             document.getElementById('recalculatedGrade'),
             document.querySelectorAll('tbody')[1]
          );

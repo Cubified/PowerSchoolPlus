@@ -16,9 +16,6 @@ function InitMenuOption(ver) {
       dialog.classList.add('Dialogger');
       dialog.innerHTML = `<div><div>
 			<h1>HCPS PowerSchool Plus v${ver}</h1>
-			<br>
-			<a href="chrome-extension://${chrome.runtime.id}/src/html/note.html">A note about grade calculation</a>
-            <br>
             <a href="chrome-extension://${chrome.runtime.id}/src/html/history.html">View your grade history for this quarter</a>
             <br><br>
             <label for="toggle-gradecalc">Enable grade calculator: </label><input type='checkbox' checked id="toggle-gradecalc"><br>
