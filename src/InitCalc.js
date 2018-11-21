@@ -56,67 +56,71 @@ const WeightedCalculator = new CalculationStrategy((grades) =>{
     <td align="center">${util.calculateLetterGrade(grade)}</td></tr>
   `;
 }, (calc)=>{
-  let box = document.createElement('div');
-  box.classList.add('box-round');
-  box.classList.add('weights');
- 
-  let h2 = document.createElement('h2');
-  h2.innerText = 'Weights';
-  box.appendChild(h2);
+  if(!document.querySelector('.box-round.weights')){
+    let box = document.createElement('div');
+    box.classList.add('box-round');
+    box.classList.add('weights');
+   
+    let h2 = document.createElement('h2');
+    h2.innerText = 'Weights';
+    box.appendChild(h2);
 
-  let table = document.createElement('table');
-  let tbody = document.createElement('tbody');
+    let table = document.createElement('table');
+    let tbody = document.createElement('tbody');
 
-  let weights = util.getExistingWeights();
-  let grades = calc.getExistingGrades();
-  let avgs = util.averageForEachWeight(grades);
+    let weights = util.getExistingWeights();
+    let grades = calc.getExistingGrades();
+    let avgs = util.averageForEachWeight(grades);
 
-  let tr0 = document.createElement('tr');
-  tr0.innerHTML = '<th>Category</th><th>Weight</th><th>Average Grade</th>';
-  tbody.appendChild(tr0);
+    let tr0 = document.createElement('tr');
+    tr0.innerHTML = '<th>Category</th><th>Weight</th><th>Average Grade</th>';
+    tbody.appendChild(tr0);
 
-  weights.forEach((e,i)=>{
-    let tr = document.createElement('tr');
+    weights.forEach((e,i)=>{
+      let tr = document.createElement('tr');
 
-    let td1 = document.createElement('td');
-    let td2 = document.createElement('td');
-    let td3 = document.createElement('td');
+      let td1 = document.createElement('td');
+      let td2 = document.createElement('td');
+      let td3 = document.createElement('td');
 
-    let label = document.createElement('label');
-    label.classList.add('unbold');
-    label.innerText = e;
-    label.htmlFor = util.makeSafeString(e);
+      let label = document.createElement('label');
+      label.classList.add('unbold');
+      label.innerText = e;
+      label.htmlFor = util.makeSafeString(e);
 
-    let input = document.createElement('input');
-    input.type = 'number';
-    input.id = util.makeSafeString(e);
-    input.value = util.guessWeight(e);
-    input.addEventListener('keydown',(e)=>{
-      if(e.keyCode === 13 && input.value.trim() !== ''){
-        calc.recalculateGrade();
-        util.updateCombobox();
-      }
+      let input = document.createElement('input');
+      input.type = 'number';
+      input.id = util.makeSafeString(e);
+      input.value = util.guessWeight(e);
+      input.addEventListener('keydown',(e)=>{
+        if(e.keyCode === 13 && input.value.trim() !== ''){
+          calc.recalculateGrade();
+          util.updateCombobox();
+        }
+      });
+
+      let avg = document.createElement('span');
+      avg.classList.add('weight-average');
+      avg.innerText = `${avgs[i].grade.toFixed(1)}%`;  
+
+      td1.appendChild(label);
+      td2.appendChild(input);
+      td3.appendChild(avg);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tbody.appendChild(tr);
     });
 
-    let avg = document.createElement('span');
-    avg.classList.add('weight-average');
-    avg.innerText = `${avgs[i].grade.toFixed(1)}%`;  
+    table.appendChild(tbody);
+    box.appendChild(table);
 
-    td1.appendChild(label);
-    td2.appendChild(input);
-    td3.appendChild(avg);
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-    tbody.appendChild(tr);
-  });
-
-  table.appendChild(tbody);
-  box.appendChild(table);
-
-  document.querySelector('#content-main').insertBefore(box,document.querySelector('#legend'));
+    document.querySelector('#content-main').insertBefore(box,document.querySelector('#legend'));
+  } else {
+    document.querySelector('.box-round.weights').style.display = 'block';
+  }
 }, ()=>{
-  document.querySelector('#content-main').removeChild(document.querySelector('.box-round.weights'));
+  document.querySelector('.box-round.weights').style.display = 'none';
 });
 const TotalPointCalculator = new CalculationStrategy((grades) => {
    return util.calcUnweightedMean(grades).toFixed(1);

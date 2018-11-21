@@ -13,7 +13,7 @@ function InitNotifications(ver) {
          });
          if(data.firstrun === undefined || data.firstrun !== ver) {
             parentElem.classList.add('firstrun');
-            parentElem.innerHTML = '<span class="full-width">HCPS PowerSchoolPlus updated to version ' + ver + '<br>This release improves the grade calculator.  Click to see what else is new</span>';
+            parentElem.innerHTML = '<span class="full-width">HCPS PowerSchoolPlus updated to version ' + ver + '<br>Click to see what\'s new</span>';
             chrome.storage.local.set({
                firstrun: ver
             });
