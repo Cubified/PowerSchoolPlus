@@ -34,11 +34,12 @@ let Utils = {
   averageForEachWeight: (arr) => {
    let out = {};
    arr.forEach((e) => {
-      if(out[e.weight]) {
-         out[e.weight].grade += e.grade;
-         out[e.weight].num += 1;
+      if(out[e.name]) {
+         out[e.name].grade += e.grade;
+         out[e.name].num += 1;
       } else {
-         out[e.weight] = {
+         out[e.name] = {
+            weight: e.weight,
             grade: e.grade,
             num: 1
          };
@@ -47,7 +48,8 @@ let Utils = {
    let temp = [];
    for(let key in out) {
       temp.push({
-         weight: parseFloat(key),
+         name: key,
+         weight: parseFloat(out[key].weight),
          grade: out[key].grade / out[key].num
       });
    }

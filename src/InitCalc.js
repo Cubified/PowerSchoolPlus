@@ -169,6 +169,7 @@ class Calculator {
         if(e.children.length > 8 && !isNaN(parseFloat(util.getNumbersInString(e.children[9].innerText)))) {
           id = (e.dataset.id || this.generateId(8,1));
           out.push({
+            name:   e.children[1].innerText,
             weight: this.strategy.determineWeight(e),
             grade:  this.strategy.determineGrade(e),
             id:     id
